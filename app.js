@@ -37,16 +37,8 @@ app.get("/",function(req,res){
 	res.render("index");
 })
 
-app.get("/register",function(req,res){
-	res.render("register");
-})
-
 app.get("/home",isLoggedIn,function(req,res){
 	res.render("home");
-})
-
-app.get('/login', (req, res) => {
-    res.render('login')
 })
 
 app.get('/logout', (req, res) => {
@@ -59,8 +51,13 @@ app.post('/register', (req, res) => {
     User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
         if (err) {
             console.log(err)
-            return res.render('register')
+            return res.render("index")
         }
+		user.email=req.body.email
+		user.rollno=req.body.rollno
+		user.year=req.body.year
+		user.branch=req.body.branch
+		user.save()
         passport.authenticate("local")(req, res, () => {
             res.redirect('/home')
         })
@@ -69,7 +66,7 @@ app.post('/register', (req, res) => {
 
 app.post('/login', passport.authenticate("local", {
     successRedirect: '/home',
-    failureRedirect: '/login'
+    failureRedirect: '/'
 }), (req, res) => { })
 
 
@@ -77,7 +74,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next()
     }
-    res.redirect('/login');
+    res.redirect('/');
 };
 
 app.listen(process.env.PORT || 3000, function(){
