@@ -1,8 +1,16 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 var express = require('express');
 var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var User = require('./models/user');
+var Blog = require('./models/blog');
+var multer = require('multer');
+var {storage} = require('./cloudinary');
+var upload = multer({storage});
 var passport = require('passport');
 var LocalStatergy = require('passport-local');
 var passportLocalMongoose = require('passport-local-mongoose');
@@ -38,17 +46,49 @@ app.get("/",function(req,res){
 })
 
 app.get("/home",isLoggedIn,function(req,res){
-	res.render("home");
+	Blog.find({},
+	function(err,blogs){
+		if(err){
+			console.log(err);
+		}
+		else{
+			res.render("home",{blogs:blogs});
+		}
+	});
 })
+
+app.get("/new",isLoggedIn,function(req,res){
+	res.render("new");
+})
+
+app.get("/show",isLoggedIn,function(req,res){
+	res.render("show");
+})
+
+
 
 app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
 })
 
+app.get("/blogs/:id",function(req,res){
+	
+	Blog.findById(req.params.id).exec(function(err,bloginfo){
+		if(err){
+			console.log(err);
+		}
+		else{
+			res.render("show",{bloginfo:bloginfo});
+		}
+	});
+});
+
+
 //POST Routes
+
 app.post('/register', (req, res) => {
-    User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
+	User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
         if (err) {
             console.log(err)
             return res.render("index")
@@ -58,16 +98,35 @@ app.post('/register', (req, res) => {
 		user.year=req.body.year
 		user.branch=req.body.branch
 		user.save()
-        passport.authenticate("local")(req, res, () => {
+		passport.authenticate("local")(req, res, () => {
             res.redirect('/home')
         })
     })
 })
+	
 
 app.post('/login', passport.authenticate("local", {
     successRedirect: '/home',
     failureRedirect: '/'
 }), (req, res) => { })
+
+app.post('/new',upload.array('img'),isLoggedIn,function(req,res){
+	
+	var author = {
+		id : req.user._id,
+		username : req.user.username
+	}
+	var newBlog = {title: req.body.title, desc: req.body.desc,img:req.files.map(f=>({url:f.path,filename:f.filename})),author: author};
+	console.log(newBlog);
+	Blog.create(newBlog,function(err,newcreated){
+		if(err){
+			console.log(err);
+		}
+		else{
+			res.redirect("/home");
+		}
+	});
+});
 
 
 function isLoggedIn(req, res, next) {
@@ -77,7 +136,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 };
 
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 3001, function(){
 	console.log("Connekt server is running");
 });
 
