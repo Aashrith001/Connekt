@@ -1,0 +1,32 @@
+.parent {
+	display: flex;
+}
+.main {
+	width: 75%;
+}
+.side-card {
+	width: 25%;
+}
+.button {
+	display: inline-block;
+}
+.form-comment {
+	display: flex;
+}
+.comment-area {
+	width: 97%;
+}
+.inner-element-comment {
+	display: flex;
+}
+.title-portion{
+	display:flex;
+}
+.commentDetails{
+	display:flex;
+	align-items:baseline;
+}
+.BlogOwnerDetails{
+	display:flex;
+	align-items:baseline;
+}

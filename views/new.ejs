@@ -1,24 +1,55 @@
 <%- include("partials/header") %>
 
-<div class="m-5">
-	<form action="/new" method="POST" enctype="multipart/form-data">
-		<div class="form-group">
-			<input class="form-control" type="text" name="title" placeholder="Title" />
+<style>
+	.h1{
+		display: flex;
+		justify-content: center;
+	}
+</style>
+
+<div class="container">
+	<div class="card p-5 m-5 border-secondary">
+		<div class="mb-5">
+			<p class="h1">Create Post</p>
 		</div>
-		<div class="form-file custom-file mb-3">
-			<input type="file" class="form-file-input" id="image" name="img" multiple />
-			<label class="form-file-label" for="image">
-				<span class="form-file-text custom-file-label">Choose image(s)...</span>
-				<span class="form-file-button">Browse</span>
-			</label>
-		</div>
-		<div class="form-group">
-			<input class="form-control" type="text" name="desc" placeholder="Description" />
-		</div>
-		<div class="form-group">
-			<input class="btn btn-lg btn-primary btn-block" type="submit" />
-		</div>
-	</form>
+		<form action="/blogs/new" method="POST" enctype="multipart/form-data">
+			<div class="form-group mb-4">
+				<input
+					class="form-control"
+					type="text"
+					name="title"
+					id="title"
+					placeholder="Headline"
+					required
+				/>
+			</div>
+
+			<div class="form-file custom-file mb-4">
+				<input type="file" class="form-file-input" id="image" name="img" multiple />
+				<label class="form-file-label" for="image">
+					<span class="form-file-text custom-file-label text-muted"
+						><i class="far fa-images fa-lg"></i>&nbsp;&nbsp;&nbsp;Add Images to your post</span
+					>
+					<span class="form-file-button">Browse</span>
+				</label>
+			</div>
+
+			<div class="form-group mb-5">
+				<textarea
+					class="form-control"
+					name="desc"
+					id="body"
+					cols="30"
+					rows="6"
+					placeholder="What's on your mind,&nbsp;<%= currentUser.username %> ?"
+					required
+				></textarea>
+			</div>
+			<div class="form-group mt-3">
+				<input class="btn btn-lg btn-primary btn-block" type="submit" value="Post" />
+			</div>
+		</form>
+	</div>
 </div>
 
 <%- include("partials/footer") %>

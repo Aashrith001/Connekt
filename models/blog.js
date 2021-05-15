@@ -17,5 +17,10 @@ var BlogSchema = mongoose.Schema({
 		username : String
 	},
 	desc: String,
+	comments : [{
+		type : mongoose.Schema.Types.ObjectId,
+		ref  : "Comment"
+	}],
+	date:Date,
 });
 module.exports = mongoose.model("Blog",BlogSchema);

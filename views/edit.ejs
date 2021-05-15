@@ -1,0 +1,47 @@
+<%- include("partials/header") %>
+<style>
+	.h1{
+		display: flex;
+		justify-content: center;
+	}
+</style>
+
+<div class="container">
+	<div class="card p-5 m-5 border-secondary">
+		<div class="mb-5">
+			<p class="h1">Update Post</p>
+		</div>
+		<form action="/blogs/<%= bloginfo._id%>?_method=PUT" method="POST">
+			<div class="form-group mb-4">
+				<label class="form-label h5 ml-2">Headline</label>
+				<input
+					class="form-control"
+					type="text"
+					name="title"
+					id="title"
+					value="<%= bloginfo.title %>"
+					required
+				/>
+			</div>
+
+			
+
+			<div class="form-group mb-5">
+				<label class="form-label h5 ml-2">What's on your mind,&nbsp;<%= currentUser.username %> ?</label>
+				<textarea
+					class="form-control"
+					name="desc"
+					id="body"
+					cols="30"
+					rows="6"
+				><%= bloginfo.desc%></textarea>
+			</div>
+			<div class="form-group mt-3">
+				<input class="btn btn-lg btn-primary btn-block" type="submit" value="Update" />
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<%- include("partials/footer") %>
