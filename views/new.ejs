@@ -25,10 +25,10 @@
 			</div>
 
 			<div class="form-file custom-file mb-4">
-				<input type="file" class="form-file-input" id="image" name="img" multiple />
-				<label class="form-file-label" for="image">
+				<input type="file" class="form-file-input" id="img" name="img" multiple />
+				<label class="form-file-label" for="img">
 					<span class="form-file-text custom-file-label text-muted"
-						><i class="far fa-images fa-lg"></i>&nbsp;&nbsp;&nbsp;Add Images to your post</span
+						>Add image(s) to your post</span
 					>
 					<span class="form-file-button">Browse</span>
 				</label>
@@ -51,5 +51,10 @@
 		</form>
 	</div>
 </div>
+
+<script>
+	bsCustomFileInput.init()
+	$('.newPostNav').addClass("active");
+</script>
 
 <%- include("partials/footer") %>

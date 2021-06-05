@@ -5,6 +5,7 @@ var User = require("../models/user");
 
 router.get('/', function (req, res) {
 	res.render('index');
+
 });
 
 router.get('/logout', (req, res) => {

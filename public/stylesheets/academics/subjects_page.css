@@ -1,0 +1,28 @@
+body {
+	background-color: #eceff1;
+}
+.name {
+	transition: 300ms;
+}
+.name:hover {
+	font-size: 45px;
+}
+a:hover {
+	text-decoration: none;
+}
+.card {
+	display: flex;
+	justify-content: center;
+	height: 180px;
+	width: 180px;
+	box-shadow: 7px 10px 12px -5px rgba(0, 0, 0, 0.56);
+	border-radius: 20px;
+	border: 3px solid #acd2eb;
+}
+
+.subjectNameDiv {
+	display: flex;
+	justify-content: start;
+	max-width: auto;
+	overflow-x: scroll;
+}

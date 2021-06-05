@@ -1,0 +1,109 @@
+<%- include("../partials/header") %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/academics/subjects_page.css" />
+
+<div class="container-fluid">
+	<div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">I Sem</p></div>
+		<div class="subjectNameDiv I">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="I") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">II Sem</p></div>
+		<div class="subjectNameDiv II">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="II") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">III Sem</p></div>
+		<div class="subjectNameDiv III">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="III") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">IV Sem</p></div>
+		<div class="subjectNameDiv IV">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="IV") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">V Sem</p></div>
+		<div class="subjectNameDiv V">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="V") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">VI Sem</p></div>
+		<div class="subjectNameDiv VI">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="VI") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">VII Sem</p></div>
+		<div class="subjectNameDiv VII">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="VII") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+		<div class="d-flex justify-content-start"><p class="h2 mt-3 ml-5">VIII Sem</p></div>
+		<div class="subjectNameDiv VIII" id="VIII">
+			<% subjects.forEach(function(subject){ %> <% if(subject.sem=="VIII") {%>
+			<div class="col-2 mb-4 mt-2">
+				<div class="card">
+					<h1 class="d-flex justify-content-center name">
+						<a href="/academics/<%=subject._id%>"><%= subject.name %></a>
+					</h1>
+				</div>
+			</div>
+			<%}%> <% }) %>
+		</div>
+	</div>
+</div>
+
+<script>
+	$('.academicNav').addClass('active');
+</script>
+
+<%- include("../partials/footer") %>

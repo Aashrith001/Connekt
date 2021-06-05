@@ -27,6 +27,7 @@
 			integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 			crossorigin="anonymous"
 		></script>
+		<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 		<link href="https://pagecdn.io/lib/easyfonts/fonts.css" rel="stylesheet" />
 
 		<style>
@@ -69,17 +70,17 @@
 								aria-expanded="false"
 								><i class="fas fa-chevron-circle-down fa-lg"></i>
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="#">Blogs</a>
-								<a class="dropdown-item" href="#">Academics</a>
+							<div class="dropdown-menu" id="abcd" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item blogNav" href="#">Blogs</a>
+								<a class="dropdown-item academicNav" href="/academics">Academics</a>
 							</div>
 						</li>
-						<li class="nav-item active">
+						<li class="nav-item homeNav">
 							<a class="nav-link" href="/blogs"
 								>Home<span class="sr-only">(current)</span></a
 							>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item newPostNav">
 							<a class="nav-link" href="/blogs/new">New Post</a>
 						</li>
 					</ul>

@@ -1,0 +1,44 @@
+<%- include("../partials/header") %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/showa_page.css" />
+<div class="container-fluid p-3">
+	<div class="top card">
+		<p class="h1 d-flex justify-content-center m-auto">
+			<%= subject.name %>
+		</p>
+	</div>
+
+	<form action="/academics/<%=subject._id%>/new" method="GET">
+		<button class="btn btn-primary">Add Your Question</button>
+	</form>
+
+	<div class="d-flex">
+		<div class="card tutorList m-3">
+			<div class="pt-2 m-auto">
+				<p class="h3">Tutors List</p>
+			</div>
+			<div class="m-auto tutorName">
+				<p>Aashrith</p>
+				<p>Aashrith</p>
+				<p>Sarvani</p>
+				<p>Sai</p>
+				<p>Akhil</p>
+			</div>
+		</div>
+		<div class="card queryArea m-3">
+			<% subject.questions.forEach(function(question){%>
+			<a href="/academics/<%=subject._id%>/<%= question._id %>"><p class="h4"><%= question.text %></p></a>
+			<% }) %>
+
+			<p>Hi</p>
+			<p>Hi</p>
+			<p>Hi</p>
+			<p>Hi</p>
+			<p>Hi</p>
+			<p>Hi</p>
+			<p>Hi</p>
+			<p>Hi</p>
+		</div>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>

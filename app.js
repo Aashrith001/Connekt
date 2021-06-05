@@ -10,7 +10,8 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var moment = require('moment');
 
 var authRoutes = require("./routes/auth"),
-	blogRoutes = require("./routes/blog");
+	blogRoutes = require("./routes/blog"),
+	academicRoutes = require("./routes/academics");
 
 var app = express();
 
@@ -51,6 +52,7 @@ app.use(function (req, res, next) {
 //GET Routes
 app.use("/",authRoutes);
 app.use("/blogs",blogRoutes);
+app.use("/academics",academicRoutes);
 
 
 app.listen(process.env.PORT || 3000, function () {

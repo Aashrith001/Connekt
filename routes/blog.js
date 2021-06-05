@@ -2,15 +2,16 @@ if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
 
-var express = require("express");
+var express = require('express');
 var path = require('path');
 var router = express.Router();
+var { cloudinary } = require('../cloudinary');
 var multer = require('multer');
 var { storage } = require('../cloudinary');
 var upload = multer({ storage });
 var User = require('../models/user');
-var Blog = require("../models/blog");
-var Comment = require("../models/comment");
+var Blog = require('../models/blog');
+var Comment = require('../models/comment');
 
 // get routes
 
@@ -28,7 +29,6 @@ router.get('/new', isLoggedIn, function (req, res) {
 	res.render('new');
 });
 
-
 router.get('/:id', function (req, res) {
 	Blog.findById(req.params.id)
 		.populate('comments')
@@ -36,6 +36,7 @@ router.get('/:id', function (req, res) {
 			if (err) {
 				console.log(err);
 			} else {
+				console.log(bloginfo);
 				res.render('show', { bloginfo: bloginfo });
 			}
 		});
@@ -51,7 +52,6 @@ router.get('/:id/edit', function (req, res) {
 	});
 });
 
-
 //POST Routes
 
 router.post('/new', upload.array('img'), isLoggedIn, function (req, res) {
@@ -64,7 +64,7 @@ router.post('/new', upload.array('img'), isLoggedIn, function (req, res) {
 		desc: req.body.desc,
 		img: req.files.map((f) => ({ url: f.path, filename: f.filename })),
 		author: author,
-		date:new Date()
+		date: new Date(),
 	};
 	console.log(newBlog);
 	Blog.create(newBlog, function (err, newcreated) {
@@ -117,11 +117,22 @@ router.put('/:id', function (req, res) {
 //delete routes
 
 router.delete('/:id', function (req, res) {
-	Blog.findByIdAndRemove(req.params.id, function (err) {
+	Blog.findById(req.params.id).exec(function (err, bloginfo) {
 		if (err) {
-			res.redirect('/blogs');
+			console.log(err);
 		} else {
-			res.redirect('/blogs');
+			var deletedImages = [];
+			bloginfo.img.forEach(function (blog) {
+				deletedImages.push(blog.filename);
+			});
+			if (deletedImages.length > 0) {
+				for (var i of deletedImages) {
+					cloudinary.uploader.destroy(i);
+				}
+			}
+			Blog.findByIdAndRemove(req.params.id, function (err) {
+				res.redirect('/blogs');
+			});
 		}
 	});
 });

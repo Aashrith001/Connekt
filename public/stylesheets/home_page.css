@@ -1,15 +1,7 @@
-.footer {
-	color: white;
-	padding: 15px 0px;
-	width: 100%;
-}
-.jumbotron {
+.carousel {
 	margin: 25px auto;
 	padding: 0px;
 	width: 100%;
-}
-.carousel-inner {
-	height: 300px;
 }
 
 .parent-container {

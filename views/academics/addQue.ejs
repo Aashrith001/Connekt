@@ -1,0 +1,33 @@
+<%- include("../partials/header") %>
+<div class="m-5">
+	<form action="/academics/<%=subject._id %>/new" method="POST" enctype="multipart/form-data">
+		<div class="form-group mb-5">
+			<textarea
+				class="form-control"
+				name="text"
+				id="body"
+				cols="30"
+				rows="6"
+				placeholder="What's on your mind,&nbsp;<%= currentUser.username %> ?"
+				required
+			></textarea>
+		</div>
+		<div class="form-file custom-file mb-4">
+			<input type="file" class="form-file-input" id="img" name="img" multiple />
+			<label class="form-file-label" for="img">
+				<span class="form-file-text custom-file-label text-muted"
+					>Add image(s) to your Question</span
+				>
+				<span class="form-file-button">Browse</span>
+			</label>
+		</div>
+
+		<div class="form-group mt-3">
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" />
+		</div>
+	</form>
+</div>
+<script>
+	bsCustomFileInput.init()
+</script>
+<%- include("../partials/footer") %>
