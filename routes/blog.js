@@ -36,7 +36,6 @@ router.get('/:id', function (req, res) {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(bloginfo);
 				res.render('show', { bloginfo: bloginfo });
 			}
 		});

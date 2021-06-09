@@ -63,7 +63,7 @@ router.get('/:id/:qid', function (req, res) {
 router.post('/:id/new', upload.array('img'), function (req, res) {
 	var author = {
 		id: req.user._id,
-		usernme: req.user.username,
+		username: req.user.username,
 	};
 	var obj = {
 		author: author,
@@ -80,7 +80,7 @@ router.post('/:id/new', upload.array('img'), function (req, res) {
 					que.save();
 					subject.questions.push(que);
 					subject.save();
-					res.send('que added successfully');
+					res.render("./academics/showa",{subject:subject})
 				}
 			});
 		}

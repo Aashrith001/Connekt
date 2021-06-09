@@ -7,36 +7,114 @@
 		</p>
 	</div>
 
-	<form action="/academics/<%=subject._id%>/new" method="GET">
-		<button class="btn btn-primary">Add Your Question</button>
-	</form>
+	<!-- Button trigger modal -->
 
-	<div class="d-flex">
-		<div class="card tutorList m-3">
-			<div class="pt-2 m-auto">
-				<p class="h3">Tutors List</p>
-			</div>
-			<div class="m-auto tutorName">
-				<p>Aashrith</p>
-				<p>Aashrith</p>
-				<p>Sarvani</p>
-				<p>Sai</p>
-				<p>Akhil</p>
+	<!-- Modal -->
+	<div
+		class="modal fade"
+		id="exampleModal"
+		tabindex="-1"
+		aria-labelledby="exampleModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog"></div>
+		<div class="modal-body">
+			<div class="container">
+				<div class="card p-5 m-5 border-secondary">
+					<div class="mb-5">
+						<p class="h1" style="text-align: center;">Add Question</p>
+					</div>
+					<form
+						action="/academics/<%=subject._id %>/new"
+						method="POST"
+						enctype="multipart/form-data"
+					>
+						<div class="form-group mb-5">
+							<textarea
+								class="form-control"
+								name="text"
+								id="body"
+								cols="30"
+								rows="6"
+								placeholder="Add your query here!!!"
+								required
+							></textarea>
+						</div>
+						<div class="form-file custom-file mb-4">
+							<input
+								type="file"
+								class="form-file-input"
+								id="img"
+								name="img"
+								multiple
+							/>
+							<label class="form-file-label" for="img">
+								<span class="form-file-text custom-file-label text-muted"
+									>Add image(s) to your Question</span
+								>
+								<span class="form-file-button">Browse</span>
+							</label>
+						</div>
+
+						<div class="form-group mt-3">
+							<input
+								class="btn btn-lg btn-primary btn-block"
+								type="submit"
+								value="Submit"
+							/>
+						</div>
+						<input
+							type="Button"
+							class="btn btn-secondary"
+							style="width: 100%;"
+							data-dismiss="modal"
+							value="Close"
+						/>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class="card queryArea m-3">
-			<% subject.questions.forEach(function(question){%>
-			<a href="/academics/<%=subject._id%>/<%= question._id %>"><p class="h4"><%= question.text %></p></a>
-			<% }) %>
+	</div>
 
-			<p>Hi</p>
-			<p>Hi</p>
-			<p>Hi</p>
-			<p>Hi</p>
-			<p>Hi</p>
-			<p>Hi</p>
-			<p>Hi</p>
-			<p>Hi</p>
+	<div>
+		<!-- <div class="card tutorList p-3 mt-3 m-2">
+			<p class="h4 font-weight-bold d-flex justify-content-center mb-3">Tutor List</p>
+			<p class="name">Theon Greyjoy</p>
+			<p class="name">Michael Scofield</p>
+			<p class="name">Aida Bugg</p>
+			<p class="name">Olive Yew</p>
+			<p class="name">Aida Bugg</p>
+			<p class="name">Patty O'Furniture</p>
+		</div> -->
+
+		<div class="queryArea">
+			<div class="card p-1 m-2">
+				<form action="/academics/<%=subject._id%>/new" method="GET">
+					<button
+						type="button"
+						class="btn btn-primary"
+						data-toggle="modal"
+						data-target="#exampleModal"
+						style="width:100%;"
+					>
+						Add Question
+					</button>
+				</form>
+			</div>
+			<div class="card p-4 m-2">
+				<% subject.questions.forEach(function(question){%>
+				<div class="card p-2 m-2">
+					<p class="h5"><%= question.text %></p>
+					<p><%= question.author.username %></p>
+					<a
+						class="btn btn-info reply"
+						href="/academics/<%=subject._id%>/<%= question._id %>"
+					>
+						Answer it!
+					</a>
+				</div>
+				<% }) %>
+			</div>
 		</div>
 	</div>
 </div>
