@@ -3,7 +3,7 @@
 <div>
 	<div class="card m-4 p-3 question">
 		<p class="h4"><%= question.text %></p>
-		<p class="text-muted font-italic a1">By Tom</p>
+		<p class="text-muted font-italic a1">By <%= question.author.username%></p>
 		<p class="text-muted font-italic a2">
 			<% var m = moment(question.date); %> <%= m.fromNow() %>
 		</p>

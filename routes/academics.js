@@ -35,7 +35,7 @@ router.get('/:id', function (req, res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.render('./academics/showa', { subject: sub });
+				res.render('./academics/show', { subject: sub });
 			}
 		});
 });
@@ -55,7 +55,7 @@ router.get('/:id/:qid', function (req, res) {
 		.exec(function (err, question) {
 			if (err) res.send(err);
 			else {
-				res.render('./academics/answer', { question: question,sub_id:req.params.id });
+				res.render('./academics/question', { question: question,sub_id:req.params.id });
 			}
 	});
 });
@@ -97,7 +97,7 @@ router.post('/db/create', function (req, res) {
 				branch: req.body.branch,
 			};
 			Subject.create(obj, function (err, newobj) {
-				if (err) console.log(err);
+				if (err) res.send(err);
 				else {
 					acad.subjects.push(newobj);
 					acad.save();

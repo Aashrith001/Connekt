@@ -20,14 +20,14 @@ router.get('/', isLoggedIn, function (req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('home', { blogs: blogs });
+			res.render('blogs/home', { blogs: blogs });
 		}
 	});
 });
 
 router.get('/new', isLoggedIn, function (req, res) {
 	req.flash('success','create a new blog');
-	res.render('new');
+	res.render('blogs/new');
 });
 
 router.get('/:id', function (req, res) {
@@ -37,7 +37,7 @@ router.get('/:id', function (req, res) {
 			if (err) {
 				console.log(err);
 			} else {
-				res.render('show', { bloginfo: bloginfo });
+				res.render('blogs/show', { bloginfo: bloginfo });
 			}
 		});
 });
@@ -47,7 +47,7 @@ router.get('/:id/edit', function (req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('edit', { bloginfo: bloginfo });
+			res.render('blogs/edit', { bloginfo: bloginfo });
 		}
 	});
 });
