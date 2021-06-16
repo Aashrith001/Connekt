@@ -1,0 +1,25 @@
+.personal_details{
+	margin:20px;
+	padding:20px;
+	width:17%;
+	border:2px solid #404040;
+	border-radius:20px;
+	height:auto;
+	display:inline-block;
+}
+.posts{
+	width:70%;
+	margin:25px;
+	padding:10px;
+	border:2px solid #404040;
+	border-radius:5px;
+	display:inline-block;
+	visibility:visible;
+}
+.blogs{
+	margin:10px;
+	padding:10px;
+}
+.academics{
+	visibility:hidden;
+}

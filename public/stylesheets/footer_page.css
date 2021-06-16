@@ -1,50 +1,50 @@
-.footer{
-	color:#fff;
-	background-color:#303030;
+.footer {
+	color: #fff;
+	background-color: #303030;
 }
-.titl{
-	font-weight:bold;
+.titl {
+	font-weight: bold;
 }
-.content{
-	margin-bottom:10px;
+.content {
+	margin-bottom: 10px;
 }
-footer.p{
-	margin:0px;
+footer.p {
+	margin: 0px;
 }
-.upperPart{
-	display:flex;
+.upperPart {
+	display: flex;
 }
-.list{
-	width:25%;
+.list {
+	width: 25%;
 }
 hr.solid {
-  border-top: 3px solid #fff;
+	border-top: 3px solid #fff;
 }
-.email{
-	height:39px;
-	width:250px;
-	color:#000;
-	border-radius:5px;
-	padding:10px;
+.email {
+	height: 39px;
+	width: 250px;
+	color: #000;
+	border-radius: 5px;
+	padding: 10px;
 }
-.emailInput{
-	display:flex;
+.emailInput {
+	display: flex;
 	align-items: baseline;
 }
-.inputContent{
-	display:flex;
+.inputContent {
+	display: flex;
 }
-.inputAndIcons{
-	display:flex;
+.inputAndIcons {
+	display: flex;
 }
-.underline{
-	text-decoration:underline;
+.underline {
+	text-decoration: underline;
 }
-.signupo{
-	display:flex;
-	justify-content:center;
-	align-items:center;
+.signupo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.invisible{
-	text-decoration:invisible;
+.invisible {
+	text-decoration: invisible;
 }

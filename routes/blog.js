@@ -26,6 +26,7 @@ router.get('/', isLoggedIn, function (req, res) {
 });
 
 router.get('/new', isLoggedIn, function (req, res) {
+	req.flash('success','create a new blog');
 	res.render('new');
 });
 

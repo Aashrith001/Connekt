@@ -1,0 +1,65 @@
+<%- include("partials/header") %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/profile_page.css" />
+
+<div class="container-fluid">
+	<div class="personal_details">
+		<div class="text-center">
+			<i class="fas fa-user-circle fa-10x"></i>
+		</div>
+		<div class="text-center details_text">
+			<p class="h3"><%= currentUser.username %></p>
+			<p class="h5"><%= currentUser.rollno %></p>
+			<p class="h5"><%= currentUser.branch %></p>
+			<p class="h5"><%= currentUser.year %> Year</p>
+		</div>
+	</div>
+
+	<div class="posts">
+		<div>
+			<button class="btn btn-primary blogs_button">
+				BLOGS
+			</button>
+			<button class="btn btn-primary academics_button">
+				ACADEMICS
+			</button>
+		</div>
+		<div class="blogs">
+			<% blogs.forEach(function(blog,i){ %>
+			<div class="card middle-card mb-3 p-3">
+				<h4>
+					<a href="/blogs/<%= blog._id %>"><%= blog.title %></a>
+				</h4>
+				<h6 class="mb-3">By <%= blog.author.username %></h6>
+				<% if(blog.img.length>0){ %>
+				<img class="mb-3" src="<%= blog.img[0].url %>" class="d-block w-100" alt="..." />
+				<% } %>
+				<p>
+					<% var maxLength = 860; var description=blog.desc; var newStr =
+					description.substring(0, maxLength);%> <% if(description.length>maxLength) { %>
+					<%=newStr%>....<a href="/blogs/<%= blog._id %>">Read more</a>
+					<% }else{ %> <%= description %> <% } %>
+				</p>
+			</div>
+			<% }); %>
+		</div>
+	</div>
+	
+	<div class="academics">
+		Hello World
+	</div>
+</div>
+
+
+<script>
+	$(".blogs_button").click(function(){
+		$(".blogs").css("visibility", "visible");
+		$(".academics").css("visibility", "hidden");
+	})
+	$(".academics_button").click(function(){
+		$(".academics").css("visibility", "visible");
+		$(".blogs").css("visibility", "hidden");
+	})
+
+</script>
+
+<%- include("partials/footer") %>

@@ -40,14 +40,14 @@ router.get('/:id', function (req, res) {
 		});
 });
 
-router.get('/:id/new', function (req, res) {
-	Subject.findById(req.params.id, function (err, subject) {
-		if (err) res.send(err);
-		else {
-			res.render('./academics/addQue', { subject: subject });
-		}
-	});
-});
+// router.get('/:id/new', function (req, res) {
+// 	Subject.findById(req.params.id, function (err, subject) {
+// 		if (err) res.send(err);
+// 		else {
+// 			res.render('./academics/addQue', { subject: subject });
+// 		}
+// 	});
+// });
 
 router.get('/:id/:qid', function (req, res) {
 	Question.findById(req.params.qid)
@@ -55,7 +55,7 @@ router.get('/:id/:qid', function (req, res) {
 		.exec(function (err, question) {
 			if (err) res.send(err);
 			else {
-				res.render('./academics/answer', { question: question });
+				res.render('./academics/answer', { question: question,sub_id:req.params.id });
 			}
 	});
 });
@@ -80,7 +80,7 @@ router.post('/:id/new', upload.array('img'), function (req, res) {
 					que.save();
 					subject.questions.push(que);
 					subject.save();
-					res.render("./academics/showa",{subject:subject})
+					res.redirect("/academics/"+req.params.id);
 				}
 			});
 		}
@@ -108,7 +108,7 @@ router.post('/db/create', function (req, res) {
 	});
 });
 
-router.post('/:id/reply/new', upload.array('img'), function (req, res) {
+router.post('/:sid/:id/reply/new', upload.array('img'), function (req, res) {
 	var author = {
 		id: req.user._id,
 		username: req.user.username,
@@ -128,55 +128,31 @@ router.post('/:id/reply/new', upload.array('img'), function (req, res) {
 					rep.save();
 					que.replies.push(rep);
 					que.save();
-					res.send(que);
+					res.redirect("/academics/"+req.params.sid+"/"+req.params.id);
 				}
 			});
 		}
 	});
 });
 
-/*
-router.get('/:id/:sub',function(req,res){
-	var id= req.params.id;
-	Academic.findById(id,function(err,academic){
-		if(err) console.log(err)
-		else{
-			var branch={
-				id:academic._id,
-				branch:academic.branch
-			}
-			var newSubject ={
-				name:req.params.sub,
-				branch:branch,
-				forum:[
-					{
-						que:'what is c programming?',
-						response:[
-						'c is a programming language',
-						'c is low level programming language',
-						'c is c',
-						'i don"t know about c'
-						]
-					},
-					{
-						que:'what is java programming?',
-						response:[
-							'java is a programming language',
-							'java is low level programming language',
-							'j is c',
-							'i don"t know about c'
-						]
-					}
-				]
-			}
-			Subject.create(newSubject,function(err,ns){
-				if(err) console.log(err)
-				else console.log(ns);
-			})
-		}
-	});
-});
 
-*/
+router.delete('/:sid/:qid',function(req,res){
+	Question.findByIdAndRemove(req.params.qid,function(err){
+		if(err) res.send(err);
+		else{
+			res.redirect("/academics/"+req.params.sid);
+		}
+	})
+})
+
+router.delete('/:sid/:qid/:rid',function(req,res){
+	Reply.findByIdAndRemove(req.params.rid,function(err){
+		if(err) res.send(err);
+		else{
+			res.redirect("/academics/"+req.params.sid+"/"+req.params.qid);
+		}
+	})
+})
+
 
 module.exports = router;

@@ -7,7 +7,16 @@
 		<p class="text-muted font-italic a2">
 			<% var m = moment(question.date); %> <%= m.fromNow() %>
 		</p>
-
+		<% if(currentUser && question.author.id.equals(currentUser._id)){%>
+			<form
+				class="button"
+				class="delete-form"
+				action="/academics/<%= sub_id %>/<%= question._id%>?_method=DELETE"
+				method="POST"
+			>
+				<button class="btn btn-danger">Delete</button>
+			</form>
+		<% } %>
 		<div>
 			<div id="carouselExampleControls" class="carousel slide mb-3" data-ride="carousel">
 				<div class="carousel-inner">
@@ -57,7 +66,7 @@
 			<div class="m-2 p-4 addReply">
 				<p class="h4 text-center">Add your answer</p>
 				<form
-					action="/academics/<%= question._id %>/reply/new"
+					action="/academics/<%=sub_id %>/<%= question._id %>/reply/new"
 					method="POST"
 					enctype="multipart/form-data"
 				>
@@ -105,6 +114,16 @@
 				<p class="text-muted font-italic a2">
 					<% var m = moment(reply.date); %> <%= m.fromNow() %>
 				</p>
+				<% if(currentUser && reply.author.id.equals(currentUser._id)) {%>
+					<form
+						class="button"
+						class="delete-form"
+						action="/academics/<%= sub_id %>/<%= question._id%>/<%= reply._id%>?_method=DELETE"
+						method="POST"
+					>
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				<% } %>
 				<div class="replyCarousel">
 					<div
 						id="carouselExampleControls<%=i%>"

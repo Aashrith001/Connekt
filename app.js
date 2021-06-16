@@ -1,8 +1,11 @@
 var express = require('express');
 var path = require('path');
+var flash = require('connect-flash');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var User = require('./models/user');
+var Blog = require('./models/blog');
+var Question = require('./models/question');
 var methodOverride = require('method-override');
 var passport = require('passport');
 var LocalStatergy = require('passport-local');
@@ -28,6 +31,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
+app.use(flash());
 
 app.use(
 	require('express-session')({
@@ -45,6 +49,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function (req, res, next) {
 	res.locals.currentUser = req.user;
+	res.locals.success = req.flash('success');
+	res.locals.error = req.flash('error');
 	res.locals.moment = require('moment');
 	next();
 });
@@ -55,7 +61,8 @@ app.use("/blogs",blogRoutes);
 app.use("/academics",academicRoutes);
 
 
-app.listen(process.env.PORT || 3001, function () {
+
+app.listen(process.env.PORT || 3000, function () {
 	console.log('Connekt server is running');
 });
 
