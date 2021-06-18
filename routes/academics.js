@@ -17,17 +17,17 @@ var Subject = require('../models/subject');
 var Question = require('../models/question');
 var Reply = require('../models/reply');
 
-router.get('/', function (req, res) {
+router.get('/', isLoggedIn,function (req, res) {
 	Subject.find({ branch: req.user.branch }, function (err, sub) {
 		res.render('./academics/subjects', { subjects: sub });
 	});
 });
 
-router.get('/db', function (req, res) {
+router.get('/db',isLoggedIn, function (req, res) {
 	res.render('insertion');
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id',isLoggedIn, function (req, res) {
 	var id = req.params.id;
 	Subject.findById(id)
 		.populate('questions')
@@ -49,7 +49,7 @@ router.get('/:id', function (req, res) {
 // 	});
 // });
 
-router.get('/:id/:qid', function (req, res) {
+router.get('/:id/:qid',isLoggedIn, function (req, res) {
 	Question.findById(req.params.qid)
 		.populate("replies")
 		.exec(function (err, question) {
@@ -60,7 +60,7 @@ router.get('/:id/:qid', function (req, res) {
 	});
 });
 
-router.post('/:id/new', upload.array('img'), function (req, res) {
+router.post('/:id/new',isLoggedIn, upload.array('img'), function (req, res) {
 	var author = {
 		id: req.user._id,
 		username: req.user.username,
@@ -87,7 +87,7 @@ router.post('/:id/new', upload.array('img'), function (req, res) {
 	});
 });
 
-router.post('/db/create', function (req, res) {
+router.post('/db/create',isLoggedIn,function (req, res) {
 	Academic.findOne({ branch: req.body.branch }, function (err, acad) {
 		if (err) console.log(err);
 		else {
@@ -108,7 +108,7 @@ router.post('/db/create', function (req, res) {
 	});
 });
 
-router.post('/:sid/:id/reply/new', upload.array('img'), function (req, res) {
+router.post('/:sid/:id/reply/new',isLoggedIn, upload.array('img'), function (req, res) {
 	var author = {
 		id: req.user._id,
 		username: req.user.username,
@@ -136,23 +136,53 @@ router.post('/:sid/:id/reply/new', upload.array('img'), function (req, res) {
 });
 
 
-router.delete('/:sid/:qid',function(req,res){
-	Question.findByIdAndRemove(req.params.qid,function(err){
+router.delete('/:sid/:qid',isLoggedIn,function(req,res){
+	Question.findById(req.params.qid,function(err,question){
 		if(err) res.send(err);
 		else{
-			res.redirect("/academics/"+req.params.sid);
+			var deletedImages = [];
+			question.img.forEach(function (ques) {
+				deletedImages.push(ques.filename);
+			});
+			if (deletedImages.length > 0) {
+				for (var i of deletedImages) {
+					cloudinary.uploader.destroy(i);
+				}
+			}
+			Question.findByIdAndRemove(req.params.qid,function(err){
+				if(err) res.send(err);
+				res.redirect("/academics/"+req.params.sid);
+			})
 		}
 	})
 })
 
-router.delete('/:sid/:qid/:rid',function(req,res){
-	Reply.findByIdAndRemove(req.params.rid,function(err){
+router.delete('/:sid/:qid/:rid',isLoggedIn,function(req,res){
+	Reply.findById(req.params.rid,function(err,reply){
 		if(err) res.send(err);
 		else{
-			res.redirect("/academics/"+req.params.sid+"/"+req.params.qid);
+			var deletedImages = [];
+			reply.img.forEach(function (rep) {
+				deletedImages.push(rep.filename);
+			});
+			if (deletedImages.length > 0) {
+				for (var i of deletedImages) {
+					cloudinary.uploader.destroy(i);
+				}
+			}
+			Reply.findByIdAndRemove(req.params.rid,function(err){
+				if(err) res.send(err);
+				res.redirect("/academics/"+req.params.sid+"/"+req.params.qid);
+			})
 		}
 	})
 })
 
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/');
+}
 
 module.exports = router;

@@ -131,6 +131,7 @@ router.delete('/:id', function (req, res) {
 				}
 			}
 			Blog.findByIdAndRemove(req.params.id, function (err) {
+				if(err) res.send(err);
 				res.redirect('/blogs');
 			});
 		}

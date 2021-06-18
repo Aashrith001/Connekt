@@ -1,0 +1,21 @@
+.top{
+	background-color:#00BFFF;
+	height:200px;
+	width:80%;
+	margin:auto;
+}
+.add{
+	width:100%;
+}
+.parent{
+	display:flex;
+}
+.tutors{
+	width:20%;
+}
+.questions{
+	width:70%;
+}
+.tutorsList p{
+	height:10px;
+}

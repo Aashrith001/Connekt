@@ -2,21 +2,22 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/academics/answer_page.css" />
 <div>
 	<div class="card m-4 p-3 question">
-		<p class="h4"><%= question.text %></p>
-		<p class="text-muted font-italic a1">By <%= question.author.username%></p>
-		<p class="text-muted font-italic a2">
-			<% var m = moment(question.date); %> <%= m.fromNow() %>
-		</p>
-		<% if(currentUser && question.author.id.equals(currentUser._id)){%>
+		<div class="d-flex">
+			<p class="h4"><%= question.text %></p>
 			<form
-				class="button"
+				class="button ml-auto"
 				class="delete-form"
 				action="/academics/<%= sub_id %>/<%= question._id%>?_method=DELETE"
 				method="POST"
 			>
 				<button class="btn btn-danger">Delete</button>
 			</form>
-		<% } %>
+		</div>
+		<p class="text-muted font-italic a1">By <%= question.author.username%></p>
+		<p class="text-muted font-italic a2">
+			<% var m = moment(question.date); %> <%= m.fromNow() %>
+		</p>
+		<% if(currentUser && question.author.id.equals(currentUser._id)){%> <% } %>
 		<div>
 			<div id="carouselExampleControls" class="carousel slide mb-3" data-ride="carousel">
 				<div class="carousel-inner">
@@ -50,7 +51,12 @@
 		</div>
 	</div>
 
-	<button type="button" class="ml-4 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+	<button
+		type="button"
+		class="ml-4 btn btn-primary"
+		data-toggle="modal"
+		data-target="#exampleModal"
+	>
 		Add Answer
 	</button>
 
@@ -95,9 +101,14 @@
 							type="submit"
 							value="Submit your answer"
 						/>
-						
 					</div>
-					<input type="button closeButton" class="btn btn-secondary" data-dismiss="modal" value="Close" style="width:100%;">
+					<input
+						type="button closeButton"
+						class="btn btn-secondary"
+						data-dismiss="modal"
+						value="Close"
+						style="width: 100%;"
+					/>
 				</form>
 			</div>
 		</div>
@@ -109,22 +120,23 @@
 			<% question.replies.forEach(function(reply,i){ %>
 
 			<div class="card m-3 p-3">
-				<p><%= reply.text %></p>
-				<p class="text-muted font-italic a1">by <%= reply.author.username %></p>
-				<p class="text-muted font-italic a2">
-					<% var m = moment(reply.date); %> <%= m.fromNow() %>
-				</p>
-				<% if(currentUser && reply.author.id.equals(currentUser._id)) {%>
+				<div class="d-flex">
+					<p><%= reply.text %></p>
 					<form
-						class="button"
+						class="button ml-auto"
 						class="delete-form"
 						action="/academics/<%= sub_id %>/<%= question._id%>/<%= reply._id%>?_method=DELETE"
 						method="POST"
 					>
 						<button class="btn btn-danger">Delete</button>
 					</form>
-				<% } %>
-				<div class="replyCarousel">
+				</div>
+				<p class="text-muted font-italic a1">by <%= reply.author.username %></p>
+				<p class="text-muted font-italic a2">
+					<% var m = moment(reply.date); %> <%= m.fromNow() %>
+				</p>
+				<% if(currentUser && reply.author.id.equals(currentUser._id)) {%> <% } %>
+				<div class="replyCarousel mt-3">
 					<div
 						id="carouselExampleControls<%=i%>"
 						class="carousel slide mb-3"
