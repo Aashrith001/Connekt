@@ -48,3 +48,20 @@
 h4 a:hover {
 	text-decoration: none;
 }
+.blogTitle{
+	color:#00A0DC;
+}
+.blogTitle:hover{
+	color:#0077B5;
+}
+.btn{
+	background-color:#00659B;
+	color:#FFF;
+}
+.card{
+	box-shadow: 7px 10px 12px -5px rgb(0 0 0 / 56%);
+	border-radius:10px;
+}
+.btnCheckOut{
+	margin-top: 15px;
+}

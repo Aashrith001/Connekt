@@ -34,18 +34,26 @@
 			.dropdown-toggle::after {
 				display: none;
 			}
-			.username{
+			.username {
 				font-size: large;
 			}
-			.navbar{
-				background-color:#303030;
+			.navbar {
+				background-color: #313335;
+			}
+			.connektText{
+				font-size:24px;
+				font-weight:500;
+			}
+			.btn{
+				color:#FFF;
+				background-color:#0077B5;
 			}
 		</style>
 	</head>
 	<body>
-		<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+		<nav class="navbar sticky-top navbar-expand-lg navbar-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="/blogs">Connekt</a>
+				<a class="navbar-brand" href="/blogs"><span class="connektText">Connekt</span></a>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -70,7 +78,11 @@
 								aria-expanded="false"
 								><i class="fas fa-chevron-circle-down fa-lg"></i>
 							</a>
-							<div class="dropdown-menu" id="abcd" aria-labelledby="navbarDropdownMenuLink">
+							<div
+								class="dropdown-menu"
+								id="abcd"
+								aria-labelledby="navbarDropdownMenuLink"
+							>
 								<a class="dropdown-item blogNav" href="/blogs">Blogs</a>
 								<a class="dropdown-item academicNav" href="/academics">Academics</a>
 							</div>
@@ -88,7 +100,7 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav ml-auto">
-						<li class="nav-item dropdown">
+						<li class="nav-item usernameNav dropdown">
 							<a
 								class="nav-link dropdown-toggle"
 								data-toggle="dropdown"
@@ -96,7 +108,8 @@
 								role="button"
 								aria-haspopup="true"
 								aria-expanded="false"
-								><span class="username"><%= currentUser.username %></span>&nbsp;&nbsp;<i class="fas fa-caret-down"></i>
+								><span class="username"><%= currentUser.username %></span
+								>&nbsp;&nbsp;<i class="fas fa-caret-down"></i>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="/profile">Profile</a>
@@ -110,4 +123,16 @@
 			</div>
 		</nav>
 	</body>
-</html>
+	<% if(error && error.length>0){%>
+	<div class="container alert alert-danger mt-3 text-center" role="alert">
+		<%= error %>
+	</div>
+	<%} if(success && success.length>0){%>
+	<div class="container alert alert-success mt-3 text-center" role="alert">
+		<%= success %>
+	</div>
+	<% } if(info && info.length>0){%>
+	<div class="container alert alert-info mt-3 text-center" role="alert">
+		<%= info %>
+	</div>
+	<% } %>

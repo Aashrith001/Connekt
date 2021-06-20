@@ -54,23 +54,23 @@
 
 <div class="container-fluid parent-container">
 	<div class="left-container container-fluid">
+		<p class="h3 left-card-head">BLOG OF THE DAY</p>
 		<div class="card left-card">
-			<p class="h5 left-card-head">BLOG OF THE DAY</p>
 			<img class="mb-2" src="<%= blogs[0].img[0].url %>" alt="<%= blogs[0].desc %>" />
-			<h4 class="left-card-title"><%= blogs[0].title %></h4>
+			<p class=" h4 left-card-title"><%= blogs[0].title %></p>
 			<div class="pr-1 pl-1 pb-2 mb-1 left-card-minor">
 				<div>
 					By Tony
 				</div>
 			</div>
-			<a href="/blogs/<%= blogs[0]._id%>" class="btn btn-primary btn-sm">Check out</a>
+			<a href="/blogs/<%= blogs[0]._id%>" class="btn btnCheckOut btn-sm">Check out</a>
 		</div>
 	</div>
 	<div class="middle-container mb-5">
 		<% blogs.forEach(function(blog,i){ %>
 		<div class="card middle-card mb-3">
 			<h4>
-				<a href="/blogs/<%= blog._id %>"><%= blog.title %></a>
+				<a class="blogTitle" href="/blogs/<%= blog._id %>"><%= blog.title %></a>
 			</h4>
 			<h6 class="mb-3">By <%= blog.author.username %></h6>
 			<% if(blog.img.length>0){ %>
@@ -85,7 +85,7 @@
 		</div>
 		<% }); %>
 	</div>
-	<div class="right-container">
+	<div class="right-container text-center">
 		<div class="right-card">
 			<div class="h3 text-center">Events</div>
 			<iframe

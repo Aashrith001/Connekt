@@ -78,6 +78,7 @@ router.post('/:id/new',middleware.isLoggedIn, upload.array('img'), function (req
 					que.save();
 					subject.questions.push(que);
 					subject.save();
+					req.flash('success','You just raised a question');
 					res.redirect("/academics/"+req.params.id);
 				}
 			});
@@ -99,6 +100,7 @@ router.post('/db/create',middleware.isAdminLoggedIn,function (req, res) {
 				else {
 					acad.subjects.push(newobj);
 					acad.save();
+					req.flash('info','New subject added');
 					res.redirect('back');
 				}
 			});
@@ -112,6 +114,7 @@ router.post('/db/tutor',middleware.isAdminLoggedIn, function (req, res) {
 		else{
 			sub.tutors.push(req.body.tutor);
 			sub.save();
+			req.flash('info','New tutor added');
 			res.redirect('back');
 		}
 	})
@@ -137,6 +140,7 @@ router.post('/:sid/:id/reply/new',middleware.isLoggedIn, upload.array('img'), fu
 					rep.save();
 					que.replies.push(rep);
 					que.save();
+					req.flash('success','You just responded to a question');
 					res.redirect("/academics/"+req.params.sid+"/"+req.params.id);
 				}
 			});
@@ -160,6 +164,7 @@ router.delete('/:sid/:qid',middleware.checkQuestionOwner,function(req,res){
 			}
 			Question.findByIdAndRemove(req.params.qid,function(err){
 				if(err) res.send(err);
+				req.flash('info','You just removed your question');
 				res.redirect("/academics/"+req.params.sid);
 			})
 		}
@@ -181,6 +186,7 @@ router.delete('/:sid/:qid/:rid',middleware.checkReplyOwner,function(req,res){
 			}
 			Reply.findByIdAndRemove(req.params.rid,function(err){
 				if(err) res.send(err);
+				req.flash('info','You just removed your response');
 				res.redirect("/academics/"+req.params.sid+"/"+req.params.qid);
 			})
 		}

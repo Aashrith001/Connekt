@@ -4,12 +4,16 @@
 		display: flex;
 		justify-content: center;
 	}
+	.card {
+		box-shadow: 7px 10px 12px -5px rgb(0 0 0 / 56%);
+		border-radius: 10px;
+	}
 </style>
 
 <div class="container">
 	<div class="card p-5 m-5 border-secondary">
 		<div class="mb-4">
-			<p class="h1">Update Post</p>
+			<p class="h1">Edit Post</p>
 		</div>
 		<div id="carouselExampleControls" class="carousel slide mb-4" data-ride="carousel">
 			<div class="carousel-inner">
@@ -57,18 +61,19 @@
 				<label class="form-label h5 ml-2"
 					>What's on your mind,&nbsp;<%= currentUser.username %> ?</label
 				>
-				<textarea class="form-control" name="desc" id="body" cols="30" rows="6"><%= bloginfo.desc%></textarea
+				<textarea class="form-control" name="desc" id="body" cols="30" rows="6">
+<%= bloginfo.desc%></textarea
 				>
 			</div>
 			<div class="form-group mt-3">
-				<input class="btn btn-lg btn-primary btn-block" type="submit" value="Update" />
+				<input class="btn btn-lg btn-block" type="submit" value="Update" />
 			</div>
 		</form>
 	</div>
 </div>
 
 <script>
-		$('.blogNav').addClass('active');
+	$('.blogNav').addClass('active');
 </script>
 
 <%- include("../partials/footer") %>

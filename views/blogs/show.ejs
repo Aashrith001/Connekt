@@ -3,28 +3,28 @@
 
 <div class="container-fluid parent">
 	<div class="main">
-		<div class="card mt-4 mb-4">
+		<div class="card mainCard mt-4 mb-4">
 			<div class="m-3">
 				<div class="title-portion">
 					<div>
-						<h2><%= bloginfo.title %></h2>
+						<p class="h2 titleText"><%= bloginfo.title %></p>
 					</div>
 					<% if(currentUser && bloginfo.author.id.equals(currentUser._id)){%>
 					<div class="ml-auto">
 						<a
-							class="button btn btn-info"
+							class="button btn info"
 							href="<%= bloginfo._id%>/edit"
 							class="btn btn-info"
 						>
-							Edit
+							<i class="fas fa-edit"></i>
 						</a>
 						<button
 							type="button"
-							class="btn btn-danger"
+							class="btn danger"
 							data-toggle="modal"
 							data-target="#exampleModal1"
 						>
-							Delete
+							<i class="fas fa-trash"></i>
 						</button>
 					</div>
 					<%}%>
@@ -69,7 +69,7 @@
 				<p><%= bloginfo.desc %></p>
 			</div>
 		</div>
-		<div class="card mr-5 mb-4 p-3">
+		<div class="card mainCard mr-5 mb-4 p-3">
 			<form class="form-comment" action="/blogs/<%= bloginfo._id%>/addcomment" method="POST">
 				<div class="comment-area form-group">
 					<textarea
@@ -81,7 +81,7 @@
 					></textarea>
 				</div>
 				<div class="submit-button form-group">
-					<button class="ml-3 mt-4 btn btn-info">
+					<button class="ml-3 mt-4 btn">
 						Submit
 					</button>
 				</div>
@@ -102,13 +102,13 @@
 						<% if(currentUser && comment.author.id.equals(currentUser._id)){%>
 						<div class="ml-auto">
 							<form
-												action="/blogs/<%= bloginfo._id%>/<%=comment._id%>?_method=DELETE"
-												method="POST"
-											>
-												<button class="btn btn-danger btn-sm">
-													<i class="fas fa-trash"></i>
-												</button>
-											</form>
+								action="/blogs/<%= bloginfo._id%>/<%=comment._id%>?_method=DELETE"
+								method="POST"
+							>
+								<button class="btn danger btn-sm">
+									<i class="fas fa-trash"></i>
+								</button>
+							</form>
 						</div>
 						<% } %>
 					</div>
@@ -119,11 +119,14 @@
 		</div>
 	</div>
 
-	<div class="side-card mt-4 mb-4 ml-5">
-		<div class="card p-3">
-			Hello World<br />Hello World<br />Hello World<br />Hello World<br />
-			Hello World<br />Hello World<br />Hello World<br />Hello World<br />
-		</div>
+	<div class="side-card mt-4 mb-4 ml-lg-5">
+		<iframe
+			src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FKolkata&amp;src=Y29ubmVrdHZjZUBnbWFpbC5jb20&amp;color=%23039BE5&amp;mode=AGENDA&amp;showNav=0&amp;showDate=0&amp;showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showTz=0&amp;title=Events&amp;showCalendars=0"
+			width="300"
+			height="600"
+			frameborder="0"
+			scrolling="no"
+		></iframe>
 	</div>
 </div>
 
@@ -153,7 +156,7 @@
 					action="/blogs/<%= bloginfo._id%>?_method=DELETE"
 					method="POST"
 				>
-					<button class="btn btn-danger">Delete</button>
+					<button class="btn danger">Delete</button>
 				</form>
 			</div>
 		</div>

@@ -16,8 +16,8 @@
 		</div>
 		<div class="posts">
 			<div class="buttons p-2 mb-3">
-				<button class="btn btn-primary blogButton">BLOGS</button>
-				<button class="btn btn-primary academicsButton">ACADEMICS</button>
+				<button class="btn blogButton buttonSelected">BLOGS</button>
+				<button class="btn academicsButton buttonNotSelected">ACADEMICS</button>
 			</div>
 			<div class="blogs">
 				<% blogs.forEach(function(blog,i){ %>
@@ -44,7 +44,7 @@
 			</div>
 
 			<div class="academics">
-				<div class="card">
+				<div>
 					<% questions.forEach(function(question){%>
 					<div class="card p-3 m-3">
 						<a class="h5"><%= question.text %></a>
@@ -60,11 +60,13 @@
 	$('.blogButton').click(function () {
 		$('.blogs').css('display', 'block');
 		$('.academics').css('display', 'none');
+		
 	});
 	$('.academicsButton').click(function () {
 		$('.academics').css('display', 'block');
 		$('.blogs').css('display', 'none');
 	});
+	$('.usernameNav').addClass('active');
 </script>
 
 <%- include("partials/footer") %>

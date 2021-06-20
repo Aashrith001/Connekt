@@ -27,7 +27,6 @@ router.get('/',middleware.isLoggedIn, function (req, res) {
 });
 
 router.get('/new',middleware.isLoggedIn, function (req, res) {
-	req.flash('success','create a new blog');
 	res.render('blogs/new');
 });
 
@@ -71,6 +70,7 @@ router.post('/new', upload.array('img'), middleware.isLoggedIn, function (req, r
 		if (err) {
 			console.log(err);
 		} else {
+			req.flash('success','You just posted a blog');
 			res.redirect('/blogs');
 		}
 	});
@@ -92,6 +92,7 @@ router.post('/:id/addcomment',middleware.isLoggedIn, function (req, res) {
 					newComment.save();
 					Blog.comments.push(newComment);
 					Blog.save();
+					req.flash('success','Sucessfully added a comment');
 					res.redirect('/blogs/' + Blog._id);
 				}
 			});
@@ -109,6 +110,7 @@ router.put('/:id',middleware.checkBlogOwner,function (req, res) {
 		if (err) {
 			res.redirect('/blogs');
 		} else {
+			req.flash('success','Sucessfully updated your blog');
 			res.redirect('/blogs/' + req.params.id);
 		}
 	});
@@ -132,6 +134,7 @@ router.delete('/:id',middleware.checkBlogOwner, function (req, res) {
 			}
 			Blog.findByIdAndRemove(req.params.id, function (err) {
 				if(err) res.send(err);
+				req.flash('info','You just deleted your blog');
 				res.redirect('/blogs');
 			});
 		}
@@ -143,6 +146,7 @@ router.delete('/:id/:comment_id',middleware.checkCommentOwner,function (req, res
 		if (err) {
 			res.redirect('back');
 		} else {
+			req.flash('info','You just deleted your comment');
 			res.redirect('/blogs/' + req.params.id);
 		}
 	});
