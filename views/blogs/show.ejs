@@ -8,7 +8,6 @@
 				<div class="title-portion">
 					<div>
 						<h2><%= bloginfo.title %></h2>
-						
 					</div>
 					<% if(currentUser && bloginfo.author.id.equals(currentUser._id)){%>
 					<div class="ml-auto">
@@ -19,22 +18,23 @@
 						>
 							Edit
 						</a>
-						<form
-							class="button"
-							class="delete-form"
-							action="/blogs/<%= bloginfo._id%>?_method=DELETE"
-							method="POST"
+						<button
+							type="button"
+							class="btn btn-danger"
+							data-toggle="modal"
+							data-target="#exampleModal1"
 						>
-							<button class="btn btn-danger">Delete</button>
-						</form>
+							Delete
+						</button>
 					</div>
 					<%}%>
 				</div>
 				<div class="BlogOwnerDetails">
-					<h4 class="mb-3">By <%= bloginfo.author.username %></h4>&nbsp;&nbsp;&nbsp;
-				<p class="text-muted font-italic">
-							<% var m = moment(bloginfo.date); %> <%= m.fromNow() %>
-						</p>
+					<h4 class="mb-3">By <%= bloginfo.author.username %></h4>
+					&nbsp;&nbsp;&nbsp;
+					<p class="text-muted font-italic">
+						<% var m = moment(bloginfo.date); %> <%= m.fromNow() %>
+					</p>
 				</div>
 				<div id="carouselExampleControls" class="carousel slide mb-3" data-ride="carousel">
 					<div class="carousel-inner">
@@ -102,13 +102,13 @@
 						<% if(currentUser && comment.author.id.equals(currentUser._id)){%>
 						<div class="ml-auto">
 							<form
-								action="/blogs/<%= bloginfo._id%>/<%=comment._id%>?_method=DELETE"
-								method="POST"
-							>
-								<button class="btn btn-danger btn-sm">
-									<i class="fas fa-trash"></i>
-								</button>
-							</form>
+												action="/blogs/<%= bloginfo._id%>/<%=comment._id%>?_method=DELETE"
+												method="POST"
+											>
+												<button class="btn btn-danger btn-sm">
+													<i class="fas fa-trash"></i>
+												</button>
+											</form>
 						</div>
 						<% } %>
 					</div>
@@ -126,5 +126,42 @@
 		</div>
 	</div>
 </div>
+
+<div
+	class="modal fade"
+	id="exampleModal1"
+	tabindex="-1"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Delete Blog</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this blog?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<form
+					class="button"
+					class="delete-form"
+					action="/blogs/<%= bloginfo._id%>?_method=DELETE"
+					method="POST"
+				>
+					<button class="btn btn-danger">Delete</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$('.blogNav').addClass('active');
+</script>
 
 <%- include("../partials/footer") %>

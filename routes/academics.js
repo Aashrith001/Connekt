@@ -16,51 +16,49 @@ var Academic = require('../models/academic');
 var Subject = require('../models/subject');
 var Question = require('../models/question');
 var Reply = require('../models/reply');
+var middleware = require("../misc/middleware");
 
-router.get('/', isLoggedIn,function (req, res) {
+router.get('/', middleware.isLoggedIn,function (req, res) {
 	Subject.find({ branch: req.user.branch }, function (err, sub) {
 		res.render('./academics/subjects', { subjects: sub });
 	});
 });
 
-router.get('/db',isLoggedIn, function (req, res) {
+router.get('/db',middleware.isAdminLoggedIn, function (req, res) {
 	res.render('insertion');
 });
 
-router.get('/:id',isLoggedIn, function (req, res) {
+router.get('/db/tutor',middleware.isAdminLoggedIn, function (req, res) {
+	res.render('tutor');
+});
+
+
+router.get('/:id',middleware.isLoggedIn, function (req, res) {
 	var id = req.params.id;
 	Subject.findById(id)
 		.populate('questions')
 		.exec(function (err, sub) {
 			if (err) {
-				res.send(err);
+				res.redirect("/academics");
 			} else {
 				res.render('./academics/show', { subject: sub });
 			}
 		});
 });
 
-// router.get('/:id/new', function (req, res) {
-// 	Subject.findById(req.params.id, function (err, subject) {
-// 		if (err) res.send(err);
-// 		else {
-// 			res.render('./academics/addQue', { subject: subject });
-// 		}
-// 	});
-// });
 
-router.get('/:id/:qid',isLoggedIn, function (req, res) {
+router.get('/:id/:qid',middleware.isLoggedIn, function (req, res) {
 	Question.findById(req.params.qid)
 		.populate("replies")
 		.exec(function (err, question) {
-			if (err) res.send(err);
+			if (err) res.redirect("/academics/"+req.params.id);
 			else {
 				res.render('./academics/question', { question: question,sub_id:req.params.id });
 			}
 	});
 });
 
-router.post('/:id/new',isLoggedIn, upload.array('img'), function (req, res) {
+router.post('/:id/new',middleware.isLoggedIn, upload.array('img'), function (req, res) {
 	var author = {
 		id: req.user._id,
 		username: req.user.username,
@@ -87,9 +85,9 @@ router.post('/:id/new',isLoggedIn, upload.array('img'), function (req, res) {
 	});
 });
 
-router.post('/db/create',isLoggedIn,function (req, res) {
+router.post('/db/create',middleware.isAdminLoggedIn,function (req, res) {
 	Academic.findOne({ branch: req.body.branch }, function (err, acad) {
-		if (err) console.log(err);
+		if (err) res.send(err);
 		else {
 			var obj = {
 				name: req.body.subject,
@@ -101,14 +99,25 @@ router.post('/db/create',isLoggedIn,function (req, res) {
 				else {
 					acad.subjects.push(newobj);
 					acad.save();
-					res.send(acad.populate('subjects'));
+					res.redirect('back');
 				}
 			});
 		}
 	});
 });
 
-router.post('/:sid/:id/reply/new',isLoggedIn, upload.array('img'), function (req, res) {
+router.post('/db/tutor',middleware.isAdminLoggedIn, function (req, res) {
+	Subject.findOne({name:req.body.subject},function(err,sub){
+		if(err) res.send(err);
+		else{
+			sub.tutors.push(req.body.tutor);
+			sub.save();
+			res.redirect('back');
+		}
+	})
+});
+
+router.post('/:sid/:id/reply/new',middleware.isLoggedIn, upload.array('img'), function (req, res) {
 	var author = {
 		id: req.user._id,
 		username: req.user.username,
@@ -136,7 +145,7 @@ router.post('/:sid/:id/reply/new',isLoggedIn, upload.array('img'), function (req
 });
 
 
-router.delete('/:sid/:qid',isLoggedIn,function(req,res){
+router.delete('/:sid/:qid',middleware.checkQuestionOwner,function(req,res){
 	Question.findById(req.params.qid,function(err,question){
 		if(err) res.send(err);
 		else{
@@ -157,7 +166,7 @@ router.delete('/:sid/:qid',isLoggedIn,function(req,res){
 	})
 })
 
-router.delete('/:sid/:qid/:rid',isLoggedIn,function(req,res){
+router.delete('/:sid/:qid/:rid',middleware.checkReplyOwner,function(req,res){
 	Reply.findById(req.params.rid,function(err,reply){
 		if(err) res.send(err);
 		else{
@@ -177,12 +186,5 @@ router.delete('/:sid/:qid/:rid',isLoggedIn,function(req,res){
 		}
 	})
 })
-
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-	res.redirect('/');
-}
 
 module.exports = router;

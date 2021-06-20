@@ -11,8 +11,10 @@
 		<div class="tutors p-1 m-1">
 			<div class="card">
 				<div class="h4 m-2 text-center">TUTORS</div>
-				<div class="text-center tutorsList">
-					<p>Hi</p><p>Hi</p><p>Hi</p><p>Hi</p>
+				<div class="text-center tutorsList m-2">
+					<% subject.tutors.forEach(function(tutor){ %>
+						<p>• <%= tutor %></p>
+					<%}) %>
 				</div>
 			</div>
 		</div>

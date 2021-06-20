@@ -20,14 +20,18 @@
 }
 
 .middle-container {
-	width: 60%;
+	width: 58%;
 }
 
 .right-container {
-	width: 20%;
+	width: 22%;
 }
 
-.right-card,
+
+.right-card{
+	width:100%;
+}
+
 .middle-card,
 .left-card {
 	width: 100%;

@@ -4,14 +4,14 @@
 	<div class="card m-4 p-3 question">
 		<div class="d-flex">
 			<p class="h4"><%= question.text %></p>
-			<form
-				class="button ml-auto"
-				class="delete-form"
-				action="/academics/<%= sub_id %>/<%= question._id%>?_method=DELETE"
-				method="POST"
+			<button
+				type="button"
+				class="ml-auto btn btn-danger"
+				data-toggle="modal"
+				data-target="#exampleModal1"
 			>
-				<button class="btn btn-danger">Delete</button>
-			</form>
+				Delete
+			</button>
 		</div>
 		<p class="text-muted font-italic a1">By <%= question.author.username%></p>
 		<p class="text-muted font-italic a2">
@@ -128,7 +128,9 @@
 						action="/academics/<%= sub_id %>/<%= question._id%>/<%= reply._id%>?_method=DELETE"
 						method="POST"
 					>
-						<button class="btn btn-danger">Delete</button>
+						<button class="btn btn-danger">
+							Delete
+						</button>
 					</form>
 				</div>
 				<p class="text-muted font-italic a1">by <%= reply.author.username %></p>
@@ -174,6 +176,41 @@
 			</div>
 
 			<% }); %>
+		</div>
+	</div>
+</div>
+
+<div
+	class="modal fade"
+	id="exampleModal1"
+	tabindex="-1"
+	aria-labelledby="exampleModalLabel1"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title ml-auto" id="exampleModalLabel1">Delete Question ?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body mr-auto text-center">
+				Are you sure you want to delete this question?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary ml-auto" data-dismiss="modal">
+					Close
+				</button>
+				<form
+					class="button mr-auto"
+					class="delete-form"
+					action="/academics/<%= sub_id %>/<%= question._id%>?_method=DELETE"
+					method="POST"
+				>
+					<button class="btn btn-danger">Delete</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

@@ -12,10 +12,11 @@ var upload = multer({ storage });
 var User = require('../models/user');
 var Blog = require('../models/blog');
 var Comment = require('../models/comment');
+var middleware = require("../misc/middleware");
 
 // get routes
 
-router.get('/', isLoggedIn, function (req, res) {
+router.get('/',middleware.isLoggedIn, function (req, res) {
 	Blog.find({}, function (err, blogs) {
 		if (err) {
 			console.log(err);
@@ -25,24 +26,24 @@ router.get('/', isLoggedIn, function (req, res) {
 	});
 });
 
-router.get('/new', isLoggedIn, function (req, res) {
+router.get('/new',middleware.isLoggedIn, function (req, res) {
 	req.flash('success','create a new blog');
 	res.render('blogs/new');
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id',middleware.isLoggedIn,function (req, res) {
 	Blog.findById(req.params.id)
 		.populate('comments')
 		.exec(function (err, bloginfo) {
 			if (err) {
-				console.log(err);
+				res.redirect("/blogs");
 			} else {
 				res.render('blogs/show', { bloginfo: bloginfo });
 			}
 		});
 });
 
-router.get('/:id/edit', function (req, res) {
+router.get('/:id/edit',middleware.checkBlogOwner,function (req, res) {
 	Blog.findById(req.params.id).exec(function (err, bloginfo) {
 		if (err) {
 			console.log(err);
@@ -54,7 +55,7 @@ router.get('/:id/edit', function (req, res) {
 
 //POST Routes
 
-router.post('/new', upload.array('img'), isLoggedIn, function (req, res) {
+router.post('/new', upload.array('img'), middleware.isLoggedIn, function (req, res) {
 	var author = {
 		id: req.user._id,
 		username: req.user.username,
@@ -66,7 +67,6 @@ router.post('/new', upload.array('img'), isLoggedIn, function (req, res) {
 		author: author,
 		date: new Date(),
 	};
-	console.log(newBlog);
 	Blog.create(newBlog, function (err, newcreated) {
 		if (err) {
 			console.log(err);
@@ -76,7 +76,7 @@ router.post('/new', upload.array('img'), isLoggedIn, function (req, res) {
 	});
 });
 
-router.post('/:id/addcomment', function (req, res) {
+router.post('/:id/addcomment',middleware.isLoggedIn, function (req, res) {
 	var text = req.body.text;
 	Blog.findById(req.params.id, function (err, Blog) {
 		if (err) {
@@ -101,7 +101,7 @@ router.post('/:id/addcomment', function (req, res) {
 
 //put methods
 
-router.put('/:id', function (req, res) {
+router.put('/:id',middleware.checkBlogOwner,function (req, res) {
 	Blog.findByIdAndUpdate(req.params.id, { title: req.body.title, desc: req.body.desc }, function (
 		err,
 		updatedBlog
@@ -116,7 +116,7 @@ router.put('/:id', function (req, res) {
 
 //delete routes
 
-router.delete('/:id', function (req, res) {
+router.delete('/:id',middleware.checkBlogOwner, function (req, res) {
 	Blog.findById(req.params.id).exec(function (err, bloginfo) {
 		if (err) {
 			console.log(err);
@@ -138,7 +138,7 @@ router.delete('/:id', function (req, res) {
 	});
 });
 
-router.delete('/:id/:comment_id', function (req, res) {
+router.delete('/:id/:comment_id',middleware.checkCommentOwner,function (req, res) {
 	Comment.findByIdAndRemove(req.params.comment_id, function (err) {
 		if (err) {
 			res.redirect('back');
@@ -148,11 +148,5 @@ router.delete('/:id/:comment_id', function (req, res) {
 	});
 });
 
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-	res.redirect('/');
-}
 
 module.exports = router;

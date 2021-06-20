@@ -1,0 +1,23 @@
+<%- include("../partials/header") %>
+<div class="container-fluid">
+	<div>
+		<iframe
+			class="calendar m-4"
+			src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23e2eaff&amp;ctz=Asia%2FKolkata&amp;src=Y29ubmVrdHZjZUBnbWFpbC5jb20&amp;src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%237986CB&amp;color=%23F4511E&amp;title=Connekt%20Events&amp;showPrint=0&amp;showTz=0"
+			width="1400"
+			height="600"
+			frameborder="10"
+			scrolling="no"
+		></iframe>
+	</div>
+</div>
+
+<script>
+	$('.calendar').css('border', '2px solid #e2eaff');
+	$('.calendar').css('border-radius', '10px');
+	$('.calendar').css('padding', '10px');
+	$('.calendar').css('background-color', '#e2eaff');
+	$('.eventsNav').addClass('active');
+</script>
+
+<%- include("../partials/footer") %>

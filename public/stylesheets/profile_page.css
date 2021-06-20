@@ -1,7 +1,7 @@
 .personal_details{
+	width:20%;
 	margin:20px;
 	padding:20px;
-	width:250px;
 	height:auto;
 	margin-top:30px;
 }
@@ -9,13 +9,29 @@
 	display:flex;
 }
 .posts{
+	width:65%;
 	padding:20px;
 	margin:20px;
-	width:70%;
 }
 a:hover{
 	text-decoration:none;
 }
 .buttons{
 	text-align:center;
+}
+.blogs{
+	display:visible;
+}
+.academics{
+	display:none;
+}
+.name{
+	font-weight:bold;
+	font-size:30px;
+	text-align:center;
+}
+.details{
+	font-size:20px;
+	text-align:center;
+	height:20px;
 }
