@@ -33,7 +33,7 @@ router.get('/profile', function (req, res) {
 router.post('/register', (req, res) => {
 	User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
 		if (err) {
-			console.log(err);
+			req.flash('error',err.message);
 			return res.render('index');
 		}
 		var usernameString = req.body.username;
@@ -55,7 +55,9 @@ router.post(
 		successRedirect: '/blogs',
 		failureRedirect: '/',
 	}),
-	(req, res) => {}
+	(req, res) => {
+		
+	}
 );
 
 module.exports = router;

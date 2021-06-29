@@ -12,10 +12,19 @@
 			crossorigin="anonymous"
 		/>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/login/index_page.css" />
-		<link rel="icon" type="image/png" href="https://res.cloudinary.com/ddugqh1wr/image/upload/v1624649762/Connekt/Connekt_Logo_sdgg1d.png">
+		<link
+			rel="icon"
+			type="image/png"
+			href="https://res.cloudinary.com/ddugqh1wr/image/upload/v1624649762/Connekt/Connekt_Logo_sdgg1d.png"
+		/>
 	</head>
 
 	<body>
+		<% if(error && error.length>0){%>
+		<div class="container alert alert-danger mt-3 text-center" role="alert">
+			<%= error %>
+		</div>
+		<% } %>
 		<div class="name">
 			<img
 				src="https://res.cloudinary.com/ddugqh1wr/image/upload/v1624649762/Connekt/Connekt_Logo_sdgg1d.png"
