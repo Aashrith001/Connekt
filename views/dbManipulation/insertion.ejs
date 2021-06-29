@@ -1,0 +1,42 @@
+<%- include("../partials/header") %>
+<div class="m-5 p-5">
+	<form action="/academics/db/create" method="POST">
+		<div class="container text-center">
+			<div class="input-group flex-nowrap mb-5">
+				<span class="input-group-text" id="addon-wrapping">Branch</span>
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Branch"
+					name="branch"
+					aria-label="Username"
+					aria-describedby="addon-wrapping"
+				/>
+			</div>
+			<div class="input-group flex-nowrap mb-5">
+				<span class="input-group-text" id="addon-wrapping">Semester</span>
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Semester"
+					name="sem"
+					aria-label="Username"
+					aria-describedby="addon-wrapping"
+				/>
+			</div>
+			<div class="input-group flex-nowrap mb-5">
+				<span class="input-group-text" id="addon-wrapping">Subject</span>
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Subject"
+					name="subject"
+					aria-label="Username"
+					aria-describedby="addon-wrapping"
+				/>
+			</div>
+			<input type="submit" class="btn btn-success" />
+		</div>
+	</form>
+</div>
+<%- include("../partials/footer") %>

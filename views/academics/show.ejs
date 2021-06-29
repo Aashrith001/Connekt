@@ -1,5 +1,8 @@
 <%- include("../partials/header") %>
 <link rel="stylesheet" type="text/css" href="/stylesheets/academics/show_page.css" />
+<script src="/javascripts/displayFileName.js"></script>
+<script src="/javascripts/academicsItemSelected.js"></script>
+
 <div class="container-fluid p-3">
 	<div class="top card">
 		<p class="h1 d-flex justify-content-center m-auto">
@@ -10,10 +13,10 @@
 	<div class="parent">
 		<div class="tutors p-1 m-1">
 			<div class="card">
-				<div class="h4 m-2 text-center">TUTORS</div>
+				<div class="h3 m-2 text-center font-weight-bold">TUTORS</div>
 				<div class="text-center tutorsList m-2">
 					<% subject.tutors.forEach(function(tutor){ %>
-						<p>• <%= tutor %></p>
+						<p class="tutorName">• <%= tutor %></p>
 					<%}) %>
 				</div>
 			</div>
@@ -68,14 +71,14 @@
 
 								<div class="form-group mt-3">
 									<input
-										class="btn btn-lg btn-primary btn-block"
+										class="btn btn-lg btn-block"
 										type="submit"
 										value="Submit"
 									/>
 								</div>
 								<input
 									type="Button"
-									class="btn btn-secondary"
+									class="btn closeButton"
 									style="width: 100%;"
 									data-dismiss="modal"
 									value="Close"
@@ -87,22 +90,12 @@
 			</div>
 
 			<div>
-				<!-- <div class="card tutorList p-3 mt-3 m-2">
-			<p class="h4 font-weight-bold d-flex justify-content-center mb-3">Tutor List</p>
-			<p class="name">Theon Greyjoy</p>
-			<p class="name">Michael Scofield</p>
-			<p class="name">Aida Bugg</p>
-			<p class="name">Olive Yew</p>
-			<p class="name">Aida Bugg</p>
-			<p class="name">Patty O'Furniture</p>
-		</div> -->
-
 				<div class="queryArea">
 					<div class="card p-1 m-2">
 						<form>
 							<button
 								type="button"
-								class="btn btn-primary"
+								class="btn"
 								data-toggle="modal"
 								data-target="#exampleModal"
 								style="width: 100%;"
@@ -120,7 +113,7 @@
 								class="btn btn-info reply"
 								href="/academics/<%=subject._id%>/<%= question._id %>"
 							>
-								Answer it!
+								Show this thread
 							</a>
 						</div>
 						<% }) %>
@@ -130,5 +123,4 @@
 		</div>
 	</div>
 </div>
-
 <%- include("../partials/footer") %>

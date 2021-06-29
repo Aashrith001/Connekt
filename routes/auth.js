@@ -1,13 +1,12 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-var passport = require("passport");
-var User = require("../models/user");
-var Blog = require("../models/blog");
-var Question = require("../models/question");
+var passport = require('passport');
+var User = require('../models/user');
+var Blog = require('../models/blog');
+var Question = require('../models/question');
 
 router.get('/', function (req, res) {
 	res.render('index');
-
 });
 
 router.get('/logout', (req, res) => {
@@ -15,17 +14,17 @@ router.get('/logout', (req, res) => {
 	res.redirect('/');
 });
 
-router.get("/profile",function(req,res){
+router.get('/profile', function (req, res) {
 	var author = {
-		id : req.user._id,
-		username : req.user.username
-	}
-	Blog.find({author:author},function(err,blogs){
-		if(err) res.send(err);
-		else{
-			Question.find({author:author},function(err,questions){
-				if(err) res.send(err);
-				else res.render("profile",{blogs:blogs,questions:questions});
+		id: req.user._id,
+		username: req.user.username,
+	};
+	Blog.find({ author: author }, function (err, blogs) {
+		if (err) res.send(err);
+		else {
+			Question.find({ author: author }, function (err, questions) {
+				if (err) res.send(err);
+				else res.render('profile', { blogs: blogs, questions: questions });
 			});
 		}
 	});
@@ -37,13 +36,14 @@ router.post('/register', (req, res) => {
 			console.log(err);
 			return res.render('index');
 		}
+		var usernameString = req.body.username;
 		user.email = req.body.email;
 		user.rollno = req.body.rollno;
 		user.year = req.body.year;
 		user.branch = req.body.branch;
 		user.save();
 		passport.authenticate('local')(req, res, () => {
-			req.flash('success','Welcome back');
+			req.flash('success', 'Welcome to Connekt ' + usernameString);
 			res.redirect('/blogs');
 		});
 	});
@@ -57,6 +57,5 @@ router.post(
 	}),
 	(req, res) => {}
 );
-
 
 module.exports = router;

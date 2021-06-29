@@ -1,13 +1,13 @@
 <%- include("partials/header") %>
-<link rel="stylesheet" type="text/css" href="/stylesheets/profile_page.css" />
-
+<link rel="stylesheet" type="text/css" href="/stylesheets/profile/profile_page.css" />
+<script src="/javascripts/profilePageScripts.js"></script>
 <div class="container-fluid">
 	<div class="parent">
 		<div class="personal_details">
 			<div class="card border-secondary p-2">
 				<div class="details_text">
 					<p class="name"><%= currentUser.username %></p>
-					<hr>
+					<hr />
 					<p class="details"><%= currentUser.rollno %></p>
 					<p class="details"><%= currentUser.branch %></p>
 					<p class="details"><%= currentUser.year %> Year</p>
@@ -16,8 +16,8 @@
 		</div>
 		<div class="posts">
 			<div class="buttons p-2 mb-3">
-				<button class="btn blogButton buttonSelected">BLOGS</button>
-				<button class="btn academicsButton buttonNotSelected">ACADEMICS</button>
+				<button class="btn blogButton">BLOGS</button>
+				<button class="btn academicsButton">ACADEMICS</button>
 			</div>
 			<div class="blogs">
 				<% blogs.forEach(function(blog,i){ %>
@@ -55,18 +55,5 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	$('.blogButton').click(function () {
-		$('.blogs').css('display', 'block');
-		$('.academics').css('display', 'none');
-		
-	});
-	$('.academicsButton').click(function () {
-		$('.academics').css('display', 'block');
-		$('.blogs').css('display', 'none');
-	});
-	$('.usernameNav').addClass('active');
-</script>
 
 <%- include("partials/footer") %>

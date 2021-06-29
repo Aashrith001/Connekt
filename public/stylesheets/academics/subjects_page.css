@@ -17,7 +17,7 @@ a:hover {
 	width: auto;
 	box-shadow: 7px 10px 12px -5px rgba(0, 0, 0, 0.56);
 	border-radius: 20px;
-	border: 3px solid #acd2eb;
+	border: 3px solid #0077B5;
 }
 
 .subjectNameDiv {
@@ -28,4 +28,10 @@ a:hover {
 }
 a{
 	font-size:auto;
+}
+.subjectName{
+	color:#00A0DC;
+}
+.subjectName:hover{
+	color:#0077B5;
 }

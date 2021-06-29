@@ -14,6 +14,7 @@ var Blog = require('../models/blog');
 var Comment = require('../models/comment');
 var middleware = require("../misc/middleware");
 
+
 // get routes
 
 router.get('/',middleware.isLoggedIn, function (req, res) {
@@ -70,7 +71,7 @@ router.post('/new', upload.array('img'), middleware.isLoggedIn, function (req, r
 		if (err) {
 			console.log(err);
 		} else {
-			req.flash('success','You just posted a blog');
+			req.flash('success','Sucessfully posted your blog');
 			res.redirect('/blogs');
 		}
 	});
@@ -134,7 +135,7 @@ router.delete('/:id',middleware.checkBlogOwner, function (req, res) {
 			}
 			Blog.findByIdAndRemove(req.params.id, function (err) {
 				if(err) res.send(err);
-				req.flash('info','You just deleted your blog');
+				req.flash('info','Sucessfully deleted your blog');
 				res.redirect('/blogs');
 			});
 		}
@@ -146,7 +147,7 @@ router.delete('/:id/:comment_id',middleware.checkCommentOwner,function (req, res
 		if (err) {
 			res.redirect('back');
 		} else {
-			req.flash('info','You just deleted your comment');
+			req.flash('info','Sucessfully deleted your comment');
 			res.redirect('/blogs/' + req.params.id);
 		}
 	});

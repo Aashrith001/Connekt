@@ -9,7 +9,7 @@ middlewareObj.checkBlogOwner = function(req,res,next){
 	if(req.isAuthenticated()){
 		Blog.findById(req.params.id,function(err,foundBlog){
 			if(err){
-				req.flash("error","uh ooh !! something went wrong");
+				req.flash("error","Uh ooh !! Something went wrong");
 				res.redirect("back");
 			}else{
 				if(foundBlog.author.id.equals(req.user._id)){
@@ -22,7 +22,7 @@ middlewareObj.checkBlogOwner = function(req,res,next){
 		});	
 	}
 	else{
-		req.flash("error","You Need To Logged in to do that");
+		req.flash("error","You need to Log In to do that");
 		res.redirect("back");
 	}
 }
@@ -43,7 +43,7 @@ middlewareObj.checkCommentOwner = function(req,res,next){
 		});	
 	}
 	else{
-		req.flash("error","You Need To Logged in to do that");
+		req.flash("error","You need to Log In to do that");
 		res.redirect("back");
 	}
 }
@@ -64,7 +64,7 @@ middlewareObj.checkQuestionOwner = function(req,res,next){
 		});	
 	}
 	else{
-		req.flash("error","You Need To Logged in to do that");
+		req.flash("error","You need to Log In to do that");
 		res.redirect("back");
 	}
 }
@@ -85,7 +85,7 @@ middlewareObj.checkReplyOwner = function(req,res,next){
 		});	
 	}
 	else{
-		req.flash("error","You Need To Logged in to do that");
+		req.flash("error","You need to Log In to do that");
 		res.redirect("back");
 	}
 }
@@ -93,21 +93,21 @@ middlewareObj.checkReplyOwner = function(req,res,next){
 middlewareObj.isAdminLoggedIn = function(req,res,next){
 	
 	if(req.isAuthenticated()){
-		User.findOne({username:"tony"},function(err,admin){
+		User.findOne({username:"admin"},function(err,admin){
 			if(err){
 				res.redirect("back");
 			}else{
 				if(admin._id.equals(req.user._id)){
 					next();
 				}else{
-					req.flash("error","You don't have permission to do that");
+					req.flash("error","You don't have permission to access it");
 					res.redirect("/blogs");
 				}
 			}
 		});	
 	}
 	else{
-		req.flash("error","You Need To Logged in to do that");
+		req.flash("error","You need to Log In to do that");
 		res.redirect("back");
 	}
 }
@@ -116,7 +116,7 @@ middlewareObj.isLoggedIn = function(req,res,next){
 	if(req.isAuthenticated()){
 		return next();
 	}
-	req.flash("error","You Need To Logged in to do that");
+	req.flash("error","You need to Log In to do that");
 	res.redirect("/");
 }
 

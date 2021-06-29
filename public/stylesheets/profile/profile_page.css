@@ -1,0 +1,49 @@
+.personal_details {
+	width: 20%;
+	margin: 20px;
+	padding: 20px;
+	height: auto;
+	margin-top: 30px;
+}
+.parent {
+	display: flex;
+}
+.posts {
+	width: 65%;
+	padding: 20px;
+	margin: 20px;
+}
+a:hover {
+	text-decoration: none;
+}
+.buttons {
+	text-align: center;
+}
+.blogs {
+	display: visible;
+}
+.academics {
+	display: none;
+}
+.name {
+	font-weight: 600;
+	font-size: 30px;
+	text-align: center;
+}
+.details {
+	font-size: 20px;
+	text-align: center;
+	height: 20px;
+}
+.card {
+	box-shadow: 7px 10px 12px -5px rgb(0 0 0 / 56%);
+	border-radius: 10px;
+}
+.buttonSelected{
+	color:#FFF;
+	background-color:#0077B5;
+}
+/* .buttonNotSelected{
+	color:#0077B5;
+	background-color:#FFF;
+} */

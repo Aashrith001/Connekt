@@ -1,5 +1,6 @@
 .top{
-	background-color:#00BFFF;
+	background-color:#00A0DC;
+	color:#FFF;
 	height:200px;
 	width:80%;
 	margin:auto;
@@ -17,5 +18,18 @@
 	width:75%;
 }
 .tutorsList p{
-	height:10px;
+	height:20px;
+}
+.closeButton{
+	background-color:gray;
+}
+.closeButton:hover{
+	background-color:gray;
+	color:black;
+}
+.tutorName{
+	font-size:20px;
+}
+.tut{
+	font-weight:bold;
 }

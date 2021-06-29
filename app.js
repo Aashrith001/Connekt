@@ -12,18 +12,27 @@ var LocalStatergy = require('passport-local');
 var passportLocalMongoose = require('passport-local-mongoose');
 var moment = require('moment');
 
-var authRoutes = require("./routes/auth"),
-	blogRoutes = require("./routes/blog"),
-	academicRoutes = require("./routes/academics");
+var authRoutes = require('./routes/auth'),
+	blogRoutes = require('./routes/blog'),
+	academicRoutes = require('./routes/academics'),
+	eventRoutes = require('./routes/events');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost:27017/connekt', {
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/connekt';
+
+mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
+	useCreateIndex: true,
 	useUnifiedTopology: true,
-	useUnifiedTopology: true,
+	useFindAndModify: false,
 });
-mongoose.set('useFindAndModify', false);
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+	console.log('Database connected');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,20 +66,18 @@ app.use(function (req, res, next) {
 });
 
 //GET Routes
-app.use("/",authRoutes);
-app.use("/blogs",blogRoutes);
-app.use("/academics",academicRoutes);
+app.use('/', authRoutes);
+app.use('/blogs', blogRoutes);
+app.use('/academics', academicRoutes);
+app.use('/events', eventRoutes);
 
-app.get('/events',function (req, res) {
-	res.render('events/events.ejs');
+app.all('*', function (req, res) {
+	res.redirect('back');
 });
 
-app.all('*',function(req,res){
-	res.redirect("back")
-})
-
-app.listen(process.env.PORT || 3000, function () {
-	console.log('Connekt server is running');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+	console.log(`Serving on port ${port}`);
 });
 
 module.exports = app;

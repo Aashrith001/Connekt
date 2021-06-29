@@ -1,0 +1,74 @@
+#sntch_button
+{   
+    width: 60px !important;
+    height: 60px !important;
+    right: 10px;
+    bottom: 10px;
+    background-image: url(https://dvgpba5hywmpo.cloudfront.net/media/image/1522254217jjdER1I8ol);
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+}
+#sntch_webchat iframe {
+    width: 320px !important;
+    height: 400px !important;
+}
+#sntch_webchat {
+    width: 320px !important;
+    height: 400px !important;
+    bottom: 10px !important;
+    right: 10px !important;
+    border-radius: 20px 20px 0px 0px !important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
+}
+
+.footer {
+	color: #fff;
+	background-color:#313335;
+}
+.titl {
+	font-weight: bold;
+}
+.content {
+	margin-bottom: 10px;
+}
+footer.p {
+	margin: 0px;
+}
+.upperPart {
+	display: flex;
+}
+.list {
+	width: 25%;
+}
+hr.solid {
+	border-top: 3px solid #fff;
+}
+.email {
+	height: 39px;
+	width: 250px;
+	color: #000;
+	border-radius: 5px;
+	padding: 10px;
+}
+.emailInput {
+	display: flex;
+	align-items: baseline;
+}
+.inputContent {
+	display: flex;
+}
+.inputAndIcons {
+	display: flex;
+}
+.underline {
+	text-decoration: underline;
+}
+.signupo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.invisible {
+	text-decoration: invisible;
+}

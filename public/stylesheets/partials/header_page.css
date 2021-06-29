@@ -1,0 +1,29 @@
+.dropdown-toggle::after {
+	display: none;
+}
+.username {
+	font-size: large;
+}
+.navbar {
+	background-color: #313335;
+}
+.connektText {
+	font-size: 24px;
+	font-weight: 500;
+}
+.btn {
+	color: #fff;
+	background-color: #0077b5;
+}
+.btn:hover {
+	color: #fff;
+	background-color: #006aa1;
+}
+.danger {
+	color: #fff;
+	background-color: #cc0000;
+}
+.danger:hover {
+	color: #fff;
+	background-color: #ae0000;
+}

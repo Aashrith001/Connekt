@@ -1,17 +1,8 @@
 <%- include("../partials/header") %>
-
-<style>
-	.h1{
-		display: flex;
-		justify-content: center;
-	}
-	.card{
-		background-color:#ECF0F3;
-		box-shadow: 7px 10px 12px -5px rgb(0 0 0 / 56%);
-		border-radius:10px;
-	}
-</style>
-
+<link rel="stylesheet" type="text/css" href="/stylesheets/blogs/new_page.css" />
+<script src="/javascripts/displayFileName.js"></script>
+<script src="/javascripts/blogItemSelected.js"></script>
+<script src="/javascripts/newPage.js"></script>
 <div class="container">
 	<div class="card p-5 m-5 border-secondary">
 		<div class="mb-5">
@@ -56,10 +47,5 @@
 		</form>
 	</div>
 </div>
-
-<script>
-	bsCustomFileInput.init()
-	$('.newPostNav').addClass("active");
-</script>
 
 <%- include("../partials/footer") %>

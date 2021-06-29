@@ -1,0 +1,27 @@
+.replies{
+	width:90%;
+}
+.a1,.a2{
+	height:8px;
+}
+.replies .card{
+	border-color:#000;
+}
+.replyCarousel{
+	margin:auto;
+	width:80%;
+}
+.modal-body{
+	background-color:#fff;
+	width:70%;
+	height:auto;
+	margin:auto;
+	border-radius: 10px;
+}
+.closeButton{
+	background-color:gray;
+}
+.closeButton:hover{
+	background-color:gray;
+	color:black;
+}

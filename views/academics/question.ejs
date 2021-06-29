@@ -1,23 +1,24 @@
 <%- include("../partials/header") %>
-<link rel="stylesheet" type="text/css" href="/stylesheets/academics/answer_page.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/academics/question_page.css" />
+<script src="/javascripts/displayFileName.js"></script>
+<script src="/javascripts/academicsItemSelected.js"></script>
 <div>
 	<div class="card m-4 p-3 question">
 		<div class="d-flex">
 			<p class="h4"><%= question.text %></p>
+			<% if(currentUser && question.author.id.equals(currentUser._id)){%>
 			<button
 				type="button"
-				class="ml-auto btn btn-danger"
+				class="ml-auto btn danger fa fa-trash"
 				data-toggle="modal"
 				data-target="#exampleModal1"
-			>
-				Delete
-			</button>
+			></button>
+			<% } %>
 		</div>
 		<p class="text-muted font-italic a1">By <%= question.author.username%></p>
 		<p class="text-muted font-italic a2">
 			<% var m = moment(question.date); %> <%= m.fromNow() %>
 		</p>
-		<% if(currentUser && question.author.id.equals(currentUser._id)){%> <% } %>
 		<div>
 			<div id="carouselExampleControls" class="carousel slide mb-3" data-ride="carousel">
 				<div class="carousel-inner">
@@ -104,7 +105,7 @@
 					</div>
 					<input
 						type="button closeButton"
-						class="btn btn-secondary"
+						class="btn closeButton"
 						data-dismiss="modal"
 						value="Close"
 						style="width: 100%;"
@@ -122,16 +123,18 @@
 			<div class="card m-3 p-3">
 				<div class="d-flex">
 					<p><%= reply.text %></p>
+					<% if(reply.author.id.equals(currentUser._id)) { %>
 					<form
 						class="button ml-auto"
 						class="delete-form"
 						action="/academics/<%= sub_id %>/<%= question._id%>/<%= reply._id%>?_method=DELETE"
 						method="POST"
 					>
-						<button class="btn btn-danger">
+						<button class="btn danger">
 							Delete
 						</button>
 					</form>
+					<% } %>
 				</div>
 				<p class="text-muted font-italic a1">by <%= reply.author.username %></p>
 				<p class="text-muted font-italic a2">
@@ -208,15 +211,11 @@
 					action="/academics/<%= sub_id %>/<%= question._id%>?_method=DELETE"
 					method="POST"
 				>
-					<button class="btn btn-danger">Delete</button>
+					<button class="btn danger">Delete</button>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-
-<script>
-	bsCustomFileInput.init();
-</script>
 
 <%- include("../partials/footer") %>

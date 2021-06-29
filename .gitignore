@@ -1,4 +1,4 @@
-/node_modules
-/data
-/.git
+node_modules
+.git
 .env
+./dbManipulation.*

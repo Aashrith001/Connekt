@@ -29,31 +29,13 @@
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 		<link href="https://pagecdn.io/lib/easyfonts/fonts.css" rel="stylesheet" />
-
-		<style>
-			.dropdown-toggle::after {
-				display: none;
-			}
-			.username {
-				font-size: large;
-			}
-			.navbar {
-				background-color: #313335;
-			}
-			.connektText{
-				font-size:24px;
-				font-weight:500;
-			}
-			.btn{
-				color:#FFF;
-				background-color:#0077B5;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/partials/header_page.css" />
+		<link rel="icon" type="image/png" href="https://res.cloudinary.com/ddugqh1wr/image/upload/v1624649762/Connekt/Connekt_Logo_sdgg1d.png">
 	</head>
 	<body>
 		<nav class="navbar sticky-top navbar-expand-lg navbar-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="/blogs"><span class="connektText">Connekt</span></a>
+				<a class="navbar-brand" href="/"><span class="connektText">Connekt</span></a>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -112,7 +94,7 @@
 								>&nbsp;&nbsp;<i class="fas fa-caret-down"></i>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="/profile">Profile</a>
+								<a class="dropdown-item profileNav" href="/profile">Profile</a>
 								<a class="dropdown-item" href="#">Settings</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/logout">Logout</a>

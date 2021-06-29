@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params:{
-    folder: 'Blogs',
+    folder: 'Connekt',
     allowedFormats: ['jpeg', 'png', 'jpg']
 }
 })

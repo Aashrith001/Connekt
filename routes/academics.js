@@ -25,11 +25,11 @@ router.get('/', middleware.isLoggedIn,function (req, res) {
 });
 
 router.get('/db',middleware.isAdminLoggedIn, function (req, res) {
-	res.render('insertion');
+	res.render('dbManipulation/insertion');
 });
 
 router.get('/db/tutor',middleware.isAdminLoggedIn, function (req, res) {
-	res.render('tutor');
+	res.render('dbManipulation/tutor');
 });
 
 

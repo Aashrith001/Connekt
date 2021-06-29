@@ -1,0 +1,15 @@
+<%- include("../partials/header") %>
+<form action="/academics/db/tutor" method="POST">
+	<div class="container">
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text" id="addon-wrapping">Tutor Name</span>
+			<input type="text" class="form-control" placeholder="name" name="tutor" aria-label="Username" aria-describedby="addon-wrapping">
+		</div>
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text" id="addon-wrapping">Subject</span>
+			<input type="text" class="form-control" placeholder="Username" name="subject" aria-label="Username" aria-describedby="addon-wrapping">
+		</div>
+		<input type="submit" class="btn btn-success">
+	</div>
+</form>
+<%- include("../partials/footer") %>
