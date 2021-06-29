@@ -11,6 +11,7 @@ router.get('/', function (req, res) {
 
 router.get('/logout', (req, res) => {
 	req.logout();
+	req.flash('success', "Goodbye!");
 	res.redirect('/');
 });
 
@@ -34,7 +35,7 @@ router.post('/register', (req, res) => {
 	User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
 		if (err) {
 			req.flash('error',err.message);
-			return res.render('index');
+			res.redirect('back');
 		}
 		var usernameString = req.body.username;
 		user.email = req.body.email;
