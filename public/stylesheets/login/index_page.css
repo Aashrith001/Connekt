@@ -9,6 +9,7 @@ body {
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
+	
 }
 
 .connekt{
@@ -242,4 +243,7 @@ img{
 	display: flex;
 	margin-top: -10px;
 	margin-bottom: 25px;
+}
+.flash{
+	width:60%;
 }
