@@ -58,11 +58,11 @@
 	<div class="left-container container-fluid">
 		<p class="h3 left-card-head">BLOG OF THE DAY</p>
 		<div class="card left-card">
-			<img class="mb-2" src="<%= blogs[0].img[0].url %>" alt="<%= blogs[0].desc %>" />
+			<img class="mb-2" src="<%= blogs[R_NUM].img[0].url %>" alt="<%= blogs[0].desc %>" />
 			<p class="h4 left-card-title"><%= blogs[0].title %></p>
 			<div class="pr-1 pl-1 pb-2 mb-1 left-card-minor">
 				<div>
-					By Tony
+					By <%= blogs[R_NUM].author.username %>
 				</div>
 			</div>
 			<a href="/blogs/<%= blogs[0]._id%>" class="btn btnCheckOut btn-sm">Check out</a>

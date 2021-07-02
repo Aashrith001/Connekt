@@ -136,7 +136,7 @@ router.delete('/:id',middleware.checkBlogOwner, function (req, res) {
 			Blog.findByIdAndRemove(req.params.id, function (err) {
 				if(err) res.send(err);
 				req.flash('info','Sucessfully deleted your blog');
-				res.redirect('/blogs');
+				res.redirect('back');
 			});
 		}
 	});

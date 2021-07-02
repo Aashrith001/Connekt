@@ -7,12 +7,14 @@
 		<div class="d-flex">
 			<p class="h4"><%= question.text %></p>
 			<% if(currentUser && question.author.id.equals(currentUser._id)){%>
-			<button
-				type="button"
-				class="ml-auto btn danger fa fa-trash"
-				data-toggle="modal"
-				data-target="#exampleModal1"
-			></button>
+			<div>
+				<button
+					type="button"
+					class="ml-auto btn danger fa fa-trash"
+					data-toggle="modal"
+					data-target="#exampleModal1"
+				></button>
+			</div>
 			<% } %>
 		</div>
 		<p class="text-muted font-italic a1">By <%= question.author.username%></p>
@@ -130,8 +132,7 @@
 						action="/academics/<%= sub_id %>/<%= question._id%>/<%= reply._id%>?_method=DELETE"
 						method="POST"
 					>
-						<button class="ml-auto btn danger fa fa-trash">
-						</button>
+						<button class="ml-auto btn danger fa fa-trash"></button>
 					</form>
 					<% } %>
 				</div>

@@ -4,6 +4,7 @@ var passport = require('passport');
 var User = require('../models/user');
 var Blog = require('../models/blog');
 var Question = require('../models/question');
+var middleware = require("../misc/middleware");
 
 router.get('/', function (req, res) {
 	res.render('index');
@@ -15,7 +16,7 @@ router.get('/logout', (req, res) => {
 	res.redirect('/');
 });
 
-router.get('/profile', function (req, res) {
+router.get('/profile',middleware.isLoggedIn, function (req, res) {
 	var author = {
 		id: req.user._id,
 		username: req.user.username,
@@ -56,7 +57,7 @@ router.post(
 		successRedirect: '/blogs',
 		failureRedirect: '/',
 		failureFlash: true,
-		successFlash: "Welcome",
+		successFlash: "Welcome Back",
 	}),
 	(req, res) => {
 		

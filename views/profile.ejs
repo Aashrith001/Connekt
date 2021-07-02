@@ -19,7 +19,11 @@
 				<button class="btn blogButton">BLOGS</button>
 				<button class="btn academicsButton">ACADEMICS</button>
 			</div>
-			<div class="blogs">
+			<div class="blogs ml-15">
+				<% if(blogs.length === 0){ %>
+					<span class="text-center">Uhh Ohh! Looks Like you didn't added any blog.</span>
+					<span>To create a new one click <a href="/blogs/new">here</a></span>
+				<% } %>
 				<% blogs.forEach(function(blog,i){ %>
 				<div class="card middle-card mb-3 p-3">
 					<h4>

@@ -16,7 +16,7 @@
 				<div class="h3 m-2 text-center font-weight-bold">TUTORS</div>
 				<div class="text-center tutorsList m-2">
 					<% subject.tutors.forEach(function(tutor){ %>
-						<p class="tutorName">• <%= tutor %></p>
+					<p class="tutorName">• <%= tutor %></p>
 					<%}) %>
 				</div>
 			</div>
@@ -107,7 +107,13 @@
 					<div class="card p-4 m-2">
 						<% subject.questions.forEach(function(question){%>
 						<div class="card p-2 m-2">
-							<p class="h5"><%= question.text %></p>
+							<p class="h5">
+								<% var maxLength = 300; var description=question.text; var newStr =
+								description.substring(0, maxLength);%> <%
+								if(description.length>maxLength) { %> <%=newStr%>... <a href="/academics/<%=subject._id%>/<%= question._id %>">Read More</a> <% }else{ %>
+								<%= description %> <% } %>
+							</p>
+
 							<p>By <%= question.author.username %></p>
 							<a
 								class="btn btn-info reply"
